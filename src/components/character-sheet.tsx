@@ -1,14 +1,17 @@
 "use client";
 
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "@/components/ui/card";
 import { StatRow } from "./stat-row";
 import { DefenseRow } from "./defense-row";
 import { AttributeRow } from "./attribute-row";
+import { StatInput } from "./stat-input";
 
 export default function CharacterSheet() {
   // Initialize state for all form fields
-  const [stats, setStats] = useState({
+  const [stats, setStats] = useState<{ [P: string]: number }>({
+    expGastos: 0,
+    expTotais: 0,
     // Existência
     vitalidadeAtual: 0,
     vitalidadeTotal: 0,
@@ -130,16 +133,156 @@ export default function CharacterSheet() {
   // Handle input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    const intValue = Number.parseInt(value);
+
+    if (
+      name === "forcaAtual" ||
+      name === "constituicaoAtual" ||
+      name === "destrezaAtual" ||
+      name === "percepcaoAtual" ||
+      name === "inteligenciaAtual" ||
+      name === "sabedoriaAtual" ||
+      name === "carismaAtual"
+    ) {
+      const expName = `${name.replace("Atual", "ExpGastos")}`;
+      const prevExpValue = stats[expName];
+      const expLeft = stats["expTotais"] - stats["expGastos"] + prevExpValue;
+      const expCost = ((intValue * (intValue + 1)) / 2) * 7;
+
+      if (expCost > expLeft) {
+        alert(
+          "Você não possui experiência suficiente para comprar este atributo"
+        );
+        return;
+      }
+
+      setStats((prev) => ({
+        ...prev,
+        [expName]: expCost,
+      }));
+    }
+
     setStats((prev) => ({
       ...prev,
-      [name]: Number.parseInt(value) || 0,
+      [name]: intValue ?? 0,
     }));
   };
+
+  useEffect(() => {
+    const attributes = [
+      stats.forcaExpGastos,
+      stats.constituicaoExpGastos,
+      stats.destrezaExpGastos,
+      stats.percepcaoExpGastos,
+      stats.inteligenciaExpGastos,
+      stats.sabedoriaExpGastos,
+      stats.carismaExpGastos,
+    ];
+
+    setStats((prev) => ({
+      ...prev,
+      expGastos: attributes.reduce((acc, cur) => acc + cur, 0),
+    }));
+  }, [
+    stats.forcaExpGastos,
+    stats.constituicaoExpGastos,
+    stats.destrezaExpGastos,
+    stats.percepcaoExpGastos,
+    stats.inteligenciaExpGastos,
+    stats.sabedoriaExpGastos,
+    stats.carismaExpGastos,
+  ]);
 
   return (
     <div className="p-4 max-w-4xl mx-auto bg-white">
       <Card className="p-6 space-y-8">
-        <h1 className="text-2xl font-bold">Ficha de Personagem</h1>
+        <h1 className="text-2xl font-bold" onClick={() => console.log(stats)}>
+          Ficha de Personagem
+        </h1>
+
+        {/* EXP Total */}
+        <div className="flex items-center gap-2">
+          <span className="font-semibold min-w-24">Experiência:</span>
+          <div className="flex items-center gap-1">
+            <StatInput
+              name="expGastos"
+              value={stats["expGastos"]}
+              onChange={handleChange}
+              label="Exp gastos"
+            />
+            <span>/</span>
+            <StatInput
+              name={"expTotais"}
+              value={stats["expTotais"]}
+              onChange={handleChange}
+              label="Exp totais"
+            />
+          </div>
+        </div>
+
+        {/* Atributos */}
+        <section>
+          <h2 className="text-xl font-bold mb-4">Atributos (EXP X7)</h2>
+
+          <div className="space-y-4">
+            <AttributeRow
+              title="Força"
+              stats={stats}
+              onChange={handleChange}
+              currentName="forcaAtual"
+              expName="forcaExpGastos"
+            />
+
+            <AttributeRow
+              title="Constituição"
+              stats={stats}
+              onChange={handleChange}
+              currentName="constituicaoAtual"
+              expName="constituicaoExpGastos"
+            />
+
+            <AttributeRow
+              title="Destreza"
+              stats={stats}
+              onChange={handleChange}
+              currentName="destrezaAtual"
+              expName="destrezaExpGastos"
+            />
+
+            <AttributeRow
+              title="Percepção"
+              stats={stats}
+              onChange={handleChange}
+              currentName="percepcaoAtual"
+              expName="percepcaoExpGastos"
+            />
+
+            <AttributeRow
+              title="Inteligência"
+              stats={stats}
+              onChange={handleChange}
+              currentName="inteligenciaAtual"
+              expName="inteligenciaExpGastos"
+            />
+
+            <AttributeRow
+              title="Sabedoria"
+              stats={stats}
+              onChange={handleChange}
+              currentName="sabedoriaAtual"
+              expName="sabedoriaExpGastos"
+            />
+
+            <AttributeRow
+              title="Carisma"
+              stats={stats}
+              onChange={handleChange}
+              currentName="carismaAtual"
+              expName="carismaExpGastos"
+            />
+          </div>
+        </section>
 
         {/* Existência */}
         <section>
@@ -330,69 +473,6 @@ export default function CharacterSheet() {
                 { name: "fragilidadeSab1", label: "Sab1" },
                 { name: "fragilidadeOutros", label: "Outros" },
               ]}
-            />
-          </div>
-        </section>
-
-        {/* Atributos */}
-        <section>
-          <h2 className="text-xl font-bold mb-4">Atributos (EXP X7)</h2>
-
-          <div className="space-y-4">
-            <AttributeRow
-              title="Força"
-              stats={stats}
-              onChange={handleChange}
-              currentName="forcaAtual"
-              expName="forcaExpGastos"
-            />
-
-            <AttributeRow
-              title="Constituição"
-              stats={stats}
-              onChange={handleChange}
-              currentName="constituicaoAtual"
-              expName="constituicaoExpGastos"
-            />
-
-            <AttributeRow
-              title="Destreza"
-              stats={stats}
-              onChange={handleChange}
-              currentName="destrezaAtual"
-              expName="destrezaExpGastos"
-            />
-
-            <AttributeRow
-              title="Percepção"
-              stats={stats}
-              onChange={handleChange}
-              currentName="percepcaoAtual"
-              expName="percepcaoExpGastos"
-            />
-
-            <AttributeRow
-              title="Inteligência"
-              stats={stats}
-              onChange={handleChange}
-              currentName="inteligenciaAtual"
-              expName="inteligenciaExpGastos"
-            />
-
-            <AttributeRow
-              title="Sabedoria"
-              stats={stats}
-              onChange={handleChange}
-              currentName="sabedoriaAtual"
-              expName="sabedoriaExpGastos"
-            />
-
-            <AttributeRow
-              title="Carisma"
-              stats={stats}
-              onChange={handleChange}
-              currentName="carismaAtual"
-              expName="carismaExpGastos"
             />
           </div>
         </section>
