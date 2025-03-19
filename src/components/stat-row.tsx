@@ -12,6 +12,7 @@ interface StatRowProps {
   totalName: string;
   modifiers: Array<{
     name: string;
+    mod: number;
     label: string;
   }>;
 }
@@ -52,10 +53,13 @@ export function StatRow({
           <span className="text-sm">= {baseValue} +</span>
           <div className="flex flex-wrap items-center gap-2">
             {modifiers.map((mod) => (
-              <div key={mod.name} className="flex items-center gap-1">
+              <div
+                key={title + mod.name + mod.mod}
+                className="flex items-center gap-1"
+              >
                 <StatInput
-                  name={mod.name}
-                  value={stats[mod.name]}
+                  name={title + mod.name + mod.mod}
+                  value={stats[mod.name] * mod.mod}
                   onChange={onChange}
                   label={mod.label}
                 />

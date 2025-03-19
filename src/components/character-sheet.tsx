@@ -12,58 +12,30 @@ export default function CharacterSheet() {
   const [stats, setStats] = useState<{ [P: string]: number }>({
     expGastos: 0,
     expTotais: 0,
+
     // Existência
     vitalidadeAtual: 0,
     vitalidadeTotal: 0,
-    vitalidadeRaca: 0,
-    vitalidadeClasse1: 0,
-    vitalidadeClasse2: 0,
-    vitalidadePer1: 0,
-    vitalidadePer2: 0,
-    vitalidadeSab1: 0,
-    vitalidadeSab2: 0,
     vitalidadeOutros: 0,
 
     regVitAtual: 0,
     regVitTotal: 0,
-    regVitRaca: 0,
-    regVitClasse1: 0,
-    regVitClasse2: 0,
-    regVitPer1: 0,
-    regVitSab1: 0,
-    regVitSab2: 0,
     regVitOutros: 0,
 
     estaminaAtual: 0,
     estaminaTotal: 0,
-    estaminaRaca: 0,
-    estaminaClasse1: 0,
-    estaminaClasse2: 0,
-    estaminaSab1: 0,
     estaminaOutros: 0,
 
     regEstAtual: 0,
     regEstTotal: 0,
-    regEstRaca: 0,
-    regEstClasse1: 0,
-    regEstClasse2: 0,
-    regEstSab1: 0,
     regEstOutros: 0,
 
     manaAtual: 0,
     manaTotal: 0,
-    manaRaca: 0,
-    manaClasse1: 0,
-    manaClasse2: 0,
-    manaInt1: 0,
     manaOutros: 0,
 
     regManAtual: 0,
     regManTotal: 0,
-    regManRaca: 0,
-    regManClasse1: 0,
-    regManClasse2: 0,
-    regManInt1: 0,
     regManOutros: 0,
 
     // Defesas
@@ -297,14 +269,14 @@ export default function CharacterSheet() {
               currentName="vitalidadeAtual"
               totalName="vitalidadeTotal"
               modifiers={[
-                { name: "vitalidadeRaca", label: "Raça" },
-                { name: "vitalidadeClasse1", label: "Classe1" },
-                { name: "vitalidadeClasse2", label: "Classe2" },
-                { name: "vitalidadePer1", label: "Per1" },
-                { name: "vitalidadePer2", label: "Per2" },
-                { name: "vitalidadeSab1", label: "Sab1" },
-                { name: "vitalidadeSab2", label: "Sab2" },
-                { name: "vitalidadeOutros", label: "Outros" },
+                { name: "forcaAtual", mod: 2, label: "For[2]" },
+                { name: "constituicaoAtual", mod: 3, label: "Con[3]" },
+                { name: "destrezaAtual", mod: 1, label: "Des[1]" },
+                { name: "percepcaoAtual", mod: 1, label: "Per[1]" },
+                { name: "inteligenciaAtual", mod: 1, label: "Int[1]" },
+                { name: "sabedoriaAtual", mod: 2, label: "Sab[2]" },
+                { name: "carismaAtual", mod: 1, label: "Car[1]" },
+                { name: "vitalidadeOutros", mod: 1, label: "Outros" },
               ]}
             />
 
@@ -316,13 +288,13 @@ export default function CharacterSheet() {
               currentName="regVitAtual"
               totalName="regVitTotal"
               modifiers={[
-                { name: "regVitRaca", label: "Raça" },
-                { name: "regVitClasse1", label: "Classe1" },
-                { name: "regVitClasse2", label: "Classe2" },
-                { name: "regVitPer1", label: "Per1" },
-                { name: "regVitSab1", label: "Sab1" },
-                { name: "regVitSab2", label: "Sab2" },
-                { name: "regVitOutros", label: "Outros" },
+                { name: "forcaAtual", label: "For[1]", mod: 1 },
+                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
+                { name: "destrezaAtual", label: "Des[1]", mod: 1 },
+                { name: "percepcaoAtual", label: "Per[1]", mod: 1 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "carismaAtual", label: "Car[1]", mod: 1 },
+                { name: "regVitOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -334,11 +306,10 @@ export default function CharacterSheet() {
               currentName="estaminaAtual"
               totalName="estaminaTotal"
               modifiers={[
-                { name: "estaminaRaca", label: "Raça" },
-                { name: "estaminaClasse1", label: "Classe1" },
-                { name: "estaminaClasse2", label: "Classe2" },
-                { name: "estaminaSab1", label: "Sab1" },
-                { name: "estaminaOutros", label: "Outros" },
+                { name: "forcaAtual", label: "For[2]", mod: 2 },
+                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "estaminaOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -350,11 +321,10 @@ export default function CharacterSheet() {
               currentName="regEstAtual"
               totalName="regEstTotal"
               modifiers={[
-                { name: "regEstRaca", label: "Raça" },
-                { name: "regEstClasse1", label: "Classe1" },
-                { name: "regEstClasse2", label: "Classe2" },
-                { name: "regEstSab1", label: "Sab1" },
-                { name: "regEstOutros", label: "Outros" },
+                { name: "forcaAtual", label: "For[1]", mod: 1 },
+                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "regEstOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -366,11 +336,11 @@ export default function CharacterSheet() {
               currentName="manaAtual"
               totalName="manaTotal"
               modifiers={[
-                { name: "manaRaca", label: "Raça" },
-                { name: "manaClasse1", label: "Classe1" },
-                { name: "manaClasse2", label: "Classe2" },
-                { name: "manaInt1", label: "Int1" },
-                { name: "manaOutros", label: "Outros" },
+                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
+                { name: "sabedoriaAtual", label: "Sab[2]", mod: 2 },
+                { name: "inteligenciaAtual", label: "Int[3]", mod: 3 },
+                { name: "carismaAtual", label: "Car[2]", mod: 2 },
+                { name: "manaOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -382,11 +352,11 @@ export default function CharacterSheet() {
               currentName="regManAtual"
               totalName="regManTotal"
               modifiers={[
-                { name: "regManRaca", label: "Raça" },
-                { name: "regManClasse1", label: "Classe1" },
-                { name: "regManClasse2", label: "Classe2" },
-                { name: "regManInt1", label: "Int1" },
-                { name: "regManOutros", label: "Outros" },
+                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "inteligenciaAtual", label: "Int[2]", mod: 2 },
+                { name: "carismaAtual", label: "Car[1]", mod: 1 },
+                { name: "regManOutros", label: "Outros", mod: 1 },
               ]}
             />
           </div>
