@@ -63,9 +63,9 @@ export default function CodeRedemption({
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Resgatar Código</DialogTitle>
+          <DialogTitle>Importar Ficha</DialogTitle>
           <DialogDescription>
-            Insira o código de resgate para receber sua recompensa.
+            Insira o código da ficha para importá-la.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -87,7 +87,7 @@ export default function CodeRedemption({
             >
               Cancelar
             </Button>
-            <Button type="submit">Resgatar</Button>
+            <Button type="submit">Importar</Button>
           </DialogFooter>
         </form>
       </DialogContent>
