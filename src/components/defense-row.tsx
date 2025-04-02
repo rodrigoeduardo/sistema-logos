@@ -36,8 +36,7 @@ export function DefenseRow({
       baseValue +
       modifiers.reduce((acc, cur) => acc + (cur.mod ?? 1) * stats[cur.name], 0);
     stats[totalName] = total;
-
-    if (stats[currentName] == 0) stats[currentName] = total;
+    stats[currentName] = total;
   }, [baseValue, currentName, modifiers, stats, totalName]);
 
   return (
