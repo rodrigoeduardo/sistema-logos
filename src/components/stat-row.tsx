@@ -1,6 +1,6 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import { useEffect, type ChangeEvent } from "react";
 import { StatInput } from "./stat-input";
 
 interface StatRowProps {
@@ -26,6 +26,15 @@ export function StatRow({
   totalName,
   modifiers,
 }: StatRowProps) {
+  useEffect(() => {
+    const total =
+      baseValue +
+      modifiers.reduce((acc, cur) => acc + cur.mod * stats[cur.name], 0);
+    stats[totalName] = total;
+
+    if (stats[currentName] == 0) stats[currentName] = total;
+  }, [baseValue, currentName, modifiers, stats, totalName]);
+
   return (
     <div className="flex border-b pb-3 last:border-b-0">
       <span className="font-semibold min-w-24">{title}:</span>

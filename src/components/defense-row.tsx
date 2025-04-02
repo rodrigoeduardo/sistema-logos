@@ -1,6 +1,6 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import { useEffect, type ChangeEvent } from "react";
 import { StatInput } from "./stat-input";
 
 interface DefenseRowProps {
@@ -14,6 +14,7 @@ interface DefenseRowProps {
   totalName: string;
   modifiers: Array<{
     name: string;
+    mod: number;
     label: string;
   }>;
 }
@@ -29,6 +30,15 @@ export function DefenseRow({
   totalName,
   modifiers,
 }: DefenseRowProps) {
+  useEffect(() => {
+    const total =
+      baseValue +
+      modifiers.reduce((acc, cur) => acc + cur.mod * stats[cur.name], 0);
+    stats[totalName] = total;
+
+    if (stats[currentName] == 0) stats[currentName] = total;
+  }, [baseValue, currentName, modifiers, stats, totalName]);
+
   return (
     <div className="flex border-b pb-3 last:border-b-0">
       <span className="font-semibold min-w-24">{title}:</span>
@@ -72,10 +82,13 @@ export function DefenseRow({
           <span className="text-sm">= {baseValue} +</span>
           <div className="flex flex-wrap items-center gap-2">
             {modifiers.map((mod) => (
-              <div key={mod.name} className="flex items-center gap-1">
+              <div
+                key={title + mod.name + mod.mod}
+                className="flex items-center gap-1"
+              >
                 <StatInput
-                  name={mod.name}
-                  value={stats[mod.name]}
+                  name={title + mod.name + mod.mod}
+                  value={stats[mod.name] * mod.mod}
                   onChange={onChange}
                   label={mod.label}
                 />

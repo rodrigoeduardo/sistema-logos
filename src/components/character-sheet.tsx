@@ -7,6 +7,8 @@ import { DefenseRow } from "./defense-row";
 import { AttributeRow } from "./attribute-row";
 import { StatInput } from "./stat-input";
 
+const ATTRIBUTE_EXP_MULTIPLIER = 5;
+
 export default function CharacterSheet() {
   // Initialize state for all form fields
   const [stats, setStats] = useState<{ [P: string]: number }>({
@@ -43,46 +45,28 @@ export default function CharacterSheet() {
     fortitudeBon: 0,
     fortitudePen: 0,
     fortitudeTotal: 0,
-    fortitudeRaca: 0,
-    fortitudeClasse1: 0,
-    fortitudeClasse2: 0,
-    fortitudeSab1: 0,
+    fortitudeAlimento: 0,
     fortitudeOutros: 0,
 
     vontadeAtual: 0,
     vontadeBon: 0,
     vontadePen: 0,
     vontadeTotal: 0,
-    vontadeRaca: 0,
-    vontadeClasse1: 0,
-    vontadeClasse2: 0,
-    vontadeSab1: 0,
-    vontadeInt1: 0,
+    vontadeDescanso: 0,
     vontadeOutros: 0,
 
     reflexosAtual: 0,
     reflexosBon: 0,
     reflexosPen: 0,
     reflexosTotal: 0,
-    reflexosRaca: 0,
-    reflexosClasse1: 0,
-    reflexosClasse2: 0,
-    reflexosPer1: 0,
-    reflexosInt1: 0,
+    reflexosArmaPrimaria: 0,
+    reflexosArmaSecundaria: 0,
     reflexosOutros: 0,
 
     fragilidadeAtual: 0,
     fragilidadeBon: 0,
     fragilidadePen: 0,
     fragilidadeTotal: 0,
-    fragilidadeRaca: 0,
-    fragilidadeClasse1: 0,
-    fragilidadeClasse2: 0,
-    fragilidadePer1: 0,
-    fragilidadePer2: 0,
-    fragilidadeInt1: 0,
-    fragilidadeInt2: 0,
-    fragilidadeSab1: 0,
     fragilidadeOutros: 0,
 
     // Atributos
@@ -120,7 +104,8 @@ export default function CharacterSheet() {
       const expName = `${name.replace("Atual", "ExpGastos")}`;
       const prevExpValue = stats[expName];
       const expLeft = stats["expTotais"] - stats["expGastos"] + prevExpValue;
-      const expCost = ((intValue * (intValue + 1)) / 2) * 7;
+      const expCost =
+        ((intValue * (intValue + 1)) / 2) * ATTRIBUTE_EXP_MULTIPLIER;
 
       if (expCost > expLeft) {
         alert(
@@ -377,11 +362,11 @@ export default function CharacterSheet() {
               penaltyName="fortitudePen"
               totalName="fortitudeTotal"
               modifiers={[
-                { name: "fortitudeRaca", label: "Raça" },
-                { name: "fortitudeClasse1", label: "Classe1" },
-                { name: "fortitudeClasse2", label: "Classe2" },
-                { name: "fortitudeSab1", label: "Sab1" },
-                { name: "fortitudeOutros", label: "Outros" },
+                { name: "forcaAtual", label: "For[2]", mod: 2 },
+                { name: "constituicaoAtual", label: "Con[3]", mod: 3 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "fortitudeAlimento", label: "Alim.", mod: 1 },
+                { name: "fortitudeOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -395,12 +380,12 @@ export default function CharacterSheet() {
               penaltyName="vontadePen"
               totalName="vontadeTotal"
               modifiers={[
-                { name: "vontadeRaca", label: "Raça" },
-                { name: "vontadeClasse1", label: "Classe1" },
-                { name: "vontadeClasse2", label: "Classe2" },
-                { name: "vontadeSab1", label: "Sab1" },
-                { name: "vontadeInt1", label: "Int1" },
-                { name: "vontadeOutros", label: "Outros" },
+                { name: "constituicaoAtual", label: "Con[3]", mod: 3 },
+                { name: "sabedoriaAtual", label: "Sab[2]", mod: 2 },
+                { name: "inteligenciaAtual", label: "Int[1]", mod: 1 },
+                { name: "carismaAtual", label: "Car[2]", mod: 2 },
+                { name: "vontadeDescanso", label: "Desc.", mod: 1 },
+                { name: "vontadeOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -414,12 +399,12 @@ export default function CharacterSheet() {
               penaltyName="reflexosPen"
               totalName="reflexosTotal"
               modifiers={[
-                { name: "reflexosRaca", label: "Raça" },
-                { name: "reflexosClasse1", label: "Classe1" },
-                { name: "reflexosClasse2", label: "Classe2" },
-                { name: "reflexosPer1", label: "Per1" },
-                { name: "reflexosInt1", label: "Int1" },
-                { name: "reflexosOutros", label: "Outros" },
+                { name: "destrezaAtual", label: "Des[3]", mod: 3 },
+                { name: "percepcaoAtual", label: "Per[2]", mod: 2 },
+                { name: "carismaAtual", label: "Car[1]", mod: 1 },
+                { name: "reflexosArmaPrimaria", label: "ArmP.", mod: 1 },
+                { name: "reflexosArmaSecundaria", label: "ArmS.", mod: 1 },
+                { name: "reflexosOutros", label: "Outros", mod: 1 },
               ]}
             />
 
@@ -433,15 +418,11 @@ export default function CharacterSheet() {
               penaltyName="fragilidadePen"
               totalName="fragilidadeTotal"
               modifiers={[
-                { name: "fragilidadeRaca", label: "Raça" },
-                { name: "fragilidadeClasse1", label: "Classe1" },
-                { name: "fragilidadeClasse2", label: "Classe2" },
-                { name: "fragilidadePer1", label: "Per1" },
-                { name: "fragilidadePer2", label: "Per2" },
-                { name: "fragilidadeInt1", label: "Int1" },
-                { name: "fragilidadeInt2", label: "Int2" },
-                { name: "fragilidadeSab1", label: "Sab1" },
-                { name: "fragilidadeOutros", label: "Outros" },
+                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
+                { name: "percepcaoAtual", label: "Per[2]", mod: 2 },
+                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
+                { name: "carismaAtual", label: "Car[1]", mod: 1 },
+                { name: "fragilidadeOutros", label: "Outros", mod: 1 },
               ]}
             />
           </div>
