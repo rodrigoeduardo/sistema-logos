@@ -12,6 +12,8 @@ import {
   ATTRIBUTES_MODIFIERS,
   DEFENSES_MODIFIERS,
 } from "@/constants/attributes-and-defenses";
+import EditableTitle from "./editable-title";
+import CodeRedemption from "./code-redemption";
 
 export type SkillValues = {
   [key: string]: {
@@ -23,7 +25,8 @@ export type SkillValues = {
 const ATTRIBUTE_EXP_MULTIPLIER = 5;
 
 export default function CharacterSheet() {
-  // Initialize state for all form fields
+  const [title, setTitle] = useState("Ficha de Personagem");
+
   const [stats, setStats] = useState<{ [P: string]: number }>(initialStats);
 
   const [skills, setSkills] = useState<SkillValues>({});
@@ -103,9 +106,15 @@ export default function CharacterSheet() {
   return (
     <div className="p-4 max-w-4xl mx-auto bg-white">
       <Card className="p-6 space-y-8">
-        <h1 className="text-2xl font-bold" onClick={() => console.log(stats)}>
-          Ficha de Personagem
-        </h1>
+        <div className="flex gap-4">
+          <EditableTitle title={title} setTitle={setTitle} />
+
+          <CodeRedemption
+            setSkills={setSkills}
+            setStats={setStats}
+            setTitle={setTitle}
+          />
+        </div>
 
         {/* EXP Total */}
         <div className="flex items-center gap-2">
@@ -321,15 +330,26 @@ export default function CharacterSheet() {
         </section>
 
         {/* Save Button */}
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-4">
           <button
             className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
             onClick={() => {
-              console.log(stats);
+              console.log(stats, skills);
               window.print();
             }}
           >
-            Salvar Ficha
+            Imprimir
+          </button>
+
+          <button
+            className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                JSON.stringify({ title, stats, skills })
+              );
+            }}
+          >
+            Copiar Código
           </button>
         </div>
       </Card>
