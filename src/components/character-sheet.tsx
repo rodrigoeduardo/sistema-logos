@@ -8,6 +8,10 @@ import { AttributeRow } from "./attribute-row";
 import { StatInput } from "./stat-input";
 import SkillsSheet from "./skills-sheet";
 import { initialStats } from "@/constants/initial-state";
+import {
+  ATTRIBUTES_MODIFIERS,
+  DEFENSES_MODIFIERS,
+} from "@/constants/attributes-and-defenses";
 
 export type SkillValues = {
   [key: string]: {
@@ -201,101 +205,62 @@ export default function CharacterSheet() {
           <div className="space-y-4">
             <StatRow
               title="Vitalidade"
-              baseValue={6}
               stats={stats}
               onChange={handleChange}
               currentName="vitalidadeAtual"
               totalName="vitalidadeTotal"
-              modifiers={[
-                { name: "forcaAtual", mod: 2, label: "For[2]" },
-                { name: "constituicaoAtual", mod: 3, label: "Con[3]" },
-                { name: "destrezaAtual", mod: 1, label: "Des[1]" },
-                { name: "percepcaoAtual", mod: 1, label: "Per[1]" },
-                { name: "inteligenciaAtual", mod: 1, label: "Int[1]" },
-                { name: "sabedoriaAtual", mod: 2, label: "Sab[2]" },
-                { name: "carismaAtual", mod: 1, label: "Car[1]" },
-                { name: "vitalidadeOutros", mod: 1, label: "Outros" },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.vitalidade.base}
+              modifiers={ATTRIBUTES_MODIFIERS.vitalidade.modifiers}
             />
 
             <StatRow
               title="Reg. Vit"
-              baseValue={3}
               stats={stats}
               onChange={handleChange}
               currentName="regVitAtual"
               totalName="regVitTotal"
-              modifiers={[
-                { name: "forcaAtual", label: "For[1]", mod: 1 },
-                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
-                { name: "destrezaAtual", label: "Des[1]", mod: 1 },
-                { name: "percepcaoAtual", label: "Per[1]", mod: 1 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "carismaAtual", label: "Car[1]", mod: 1 },
-                { name: "regVitOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.base}
+              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.modifiers}
             />
 
             <StatRow
               title="Estamina"
-              baseValue={2}
               stats={stats}
               onChange={handleChange}
               currentName="estaminaAtual"
               totalName="estaminaTotal"
-              modifiers={[
-                { name: "forcaAtual", label: "For[2]", mod: 2 },
-                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "estaminaOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.estamina.base}
+              modifiers={ATTRIBUTES_MODIFIERS.estamina.modifiers}
             />
 
             <StatRow
               title="Reg. Est"
-              baseValue={1}
               stats={stats}
               onChange={handleChange}
               currentName="regEstAtual"
               totalName="regEstTotal"
-              modifiers={[
-                { name: "forcaAtual", label: "For[1]", mod: 1 },
-                { name: "constituicaoAtual", label: "Con[2]", mod: 2 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "regEstOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.base}
+              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.modifiers}
             />
 
             <StatRow
               title="Mana"
-              baseValue={4}
               stats={stats}
               onChange={handleChange}
               currentName="manaAtual"
               totalName="manaTotal"
-              modifiers={[
-                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
-                { name: "sabedoriaAtual", label: "Sab[2]", mod: 2 },
-                { name: "inteligenciaAtual", label: "Int[3]", mod: 3 },
-                { name: "carismaAtual", label: "Car[2]", mod: 2 },
-                { name: "manaOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.mana.base}
+              modifiers={ATTRIBUTES_MODIFIERS.mana.modifiers}
             />
 
             <StatRow
               title="Reg. Man"
-              baseValue={2}
               stats={stats}
               onChange={handleChange}
               currentName="regManAtual"
               totalName="regManTotal"
-              modifiers={[
-                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "inteligenciaAtual", label: "Int[2]", mod: 2 },
-                { name: "carismaAtual", label: "Car[1]", mod: 1 },
-                { name: "regManOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoMana.base}
+              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoMana.modifiers}
             />
           </div>
         </section>
@@ -307,76 +272,50 @@ export default function CharacterSheet() {
           <div className="space-y-4">
             <DefenseRow
               title="Fortitude"
-              baseValue={1}
               stats={stats}
               onChange={handleChange}
               currentName="fortitudeAtual"
               bonusName="fortitudeBon"
               penaltyName="fortitudePen"
               totalName="fortitudeTotal"
-              modifiers={[
-                { name: "forcaAtual", label: "For[2]", mod: 2 },
-                { name: "constituicaoAtual", label: "Con[3]", mod: 3 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "fortitudeAlimento", label: "Alim.", mod: 1 },
-                { name: "fortitudeOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={DEFENSES_MODIFIERS.fortitude.base}
+              modifiers={DEFENSES_MODIFIERS.fortitude.modifiers}
             />
 
             <DefenseRow
               title="Vontade"
-              baseValue={1}
               stats={stats}
               onChange={handleChange}
               currentName="vontadeAtual"
               bonusName="vontadeBon"
               penaltyName="vontadePen"
               totalName="vontadeTotal"
-              modifiers={[
-                { name: "constituicaoAtual", label: "Con[3]", mod: 3 },
-                { name: "sabedoriaAtual", label: "Sab[2]", mod: 2 },
-                { name: "inteligenciaAtual", label: "Int[1]", mod: 1 },
-                { name: "carismaAtual", label: "Car[2]", mod: 2 },
-                { name: "vontadeDescanso", label: "Desc.", mod: 1 },
-                { name: "vontadeOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={DEFENSES_MODIFIERS.vontade.base}
+              modifiers={DEFENSES_MODIFIERS.vontade.modifiers}
             />
 
             <DefenseRow
               title="Reflexos"
-              baseValue={1}
               stats={stats}
               onChange={handleChange}
               currentName="reflexosAtual"
               bonusName="reflexosBon"
               penaltyName="reflexosPen"
               totalName="reflexosTotal"
-              modifiers={[
-                { name: "destrezaAtual", label: "Des[3]", mod: 3 },
-                { name: "percepcaoAtual", label: "Per[2]", mod: 2 },
-                { name: "carismaAtual", label: "Car[1]", mod: 1 },
-                { name: "reflexosArmaPrimaria", label: "ArmP.", mod: 1 },
-                { name: "reflexosArmaSecundaria", label: "ArmS.", mod: 1 },
-                { name: "reflexosOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={DEFENSES_MODIFIERS.reflexos.base}
+              modifiers={DEFENSES_MODIFIERS.reflexos.modifiers}
             />
 
             <DefenseRow
               title="Fragilidade"
-              baseValue={1}
               stats={stats}
               onChange={handleChange}
               currentName="fragilidadeAtual"
               bonusName="fragilidadeBon"
               penaltyName="fragilidadePen"
               totalName="fragilidadeTotal"
-              modifiers={[
-                { name: "constituicaoAtual", label: "Con[1]", mod: 1 },
-                { name: "percepcaoAtual", label: "Per[2]", mod: 2 },
-                { name: "sabedoriaAtual", label: "Sab[1]", mod: 1 },
-                { name: "carismaAtual", label: "Car[1]", mod: 1 },
-                { name: "fragilidadeOutros", label: "Outros", mod: 1 },
-              ]}
+              baseValue={DEFENSES_MODIFIERS.fragilidade.base}
+              modifiers={DEFENSES_MODIFIERS.fragilidade.modifiers}
             />
           </div>
         </section>

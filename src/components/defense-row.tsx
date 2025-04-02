@@ -2,6 +2,7 @@
 
 import { useEffect, type ChangeEvent } from "react";
 import { StatInput } from "./stat-input";
+import { getStatLabel } from "@/utils/stats";
 
 interface DefenseRowProps {
   title: string;
@@ -14,8 +15,8 @@ interface DefenseRowProps {
   totalName: string;
   modifiers: Array<{
     name: string;
-    mod: number;
-    label: string;
+    mod?: number;
+    label?: string;
   }>;
 }
 
@@ -33,7 +34,7 @@ export function DefenseRow({
   useEffect(() => {
     const total =
       baseValue +
-      modifiers.reduce((acc, cur) => acc + cur.mod * stats[cur.name], 0);
+      modifiers.reduce((acc, cur) => acc + (cur.mod ?? 1) * stats[cur.name], 0);
     stats[totalName] = total;
 
     if (stats[currentName] == 0) stats[currentName] = total;
@@ -88,9 +89,9 @@ export function DefenseRow({
               >
                 <StatInput
                   name={title + mod.name + mod.mod}
-                  value={stats[mod.name] * mod.mod}
+                  value={stats[mod.name] * (mod.mod ?? 1)}
                   onChange={onChange}
-                  label={mod.label}
+                  label={mod.label ?? getStatLabel(mod.name, mod.mod)}
                 />
                 {mod.name !== modifiers[modifiers.length - 1].name && (
                   <span>+</span>
