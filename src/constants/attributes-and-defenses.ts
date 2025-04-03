@@ -3,7 +3,7 @@ export const ATTRIBUTES_MODIFIERS = {
     base: 6,
     modifiers: [
       { name: "forcaAtual", mod: 2 },
-      { name: "constituicaoAtual", mod: 3 },
+      { name: "constituicaoAtual", mod: 4 },
       { name: "destrezaAtual", mod: 1 },
       { name: "percepcaoAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 1 },
@@ -37,7 +37,7 @@ export const ATTRIBUTES_MODIFIERS = {
     base: 1,
     modifiers: [
       { name: "forcaAtual", mod: 1 },
-      { name: "constituicaoAtual", mod: 2 },
+      { name: "constituicaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
       { name: "regEstOutros", label: "Outros" },
     ],
