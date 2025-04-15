@@ -22,7 +22,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LEVEL_DICE } from "@/constants/dice-levels";
-import { rollDice } from "@/utils/rolls";
+import { rollDice, RollResult } from "@/utils/rolls";
+import { SkillRoll } from "./SkillRoll";
 
 interface SkillsSheetProps {
   skills: SkillValues;
@@ -64,6 +65,7 @@ export default function SkillsSheet({
 }: SkillsSheetProps) {
   // State for the new skill form
   const [newSkill, setNewSkill] = useState<string>("");
+  const [lastRollResult, setLastRollResult] = useState<RollResult | null>(null);
 
   // Handle rolling dice for a skill
   const handleRollSkill = (skill: string, value: number) => {
@@ -89,7 +91,8 @@ export default function SkillsSheet({
       return;
     }
 
-    rollDice(diceNotation, (result) => {
+    rollDice(diceNotation, skill, value, stats, (result: RollResult) => {
+      setLastRollResult(result);
       const attributeInfo = !SIMPLE_SKILLS.includes(skill as SimpleSkill)
         ? ` + ${COMPLEX_SKILLS_ATTRIBUTES[skill]} (${
             stats[
@@ -100,7 +103,9 @@ export default function SkillsSheet({
           })`
         : "";
       console.log(
-        `Rolagem de ${skill} (Nível ${value}${attributeInfo} = ${effectiveLevel}) [${diceNotation}]:`,
+        `Rolagem de ${skill} (Nível ${value}${attributeInfo} = ${effectiveLevel}) [${diceNotation.join(
+          "+"
+        )}]:`,
         result
       );
     });
@@ -238,6 +243,12 @@ export default function SkillsSheet({
   return (
     <section>
       <h2 className="text-xl font-bold mb-4">Perícias (EXP X1)</h2>
+
+      {lastRollResult && (
+        <div className="mb-4 p-4 border rounded-lg bg-gray-50">
+          <SkillRoll result={lastRollResult} />
+        </div>
+      )}
 
       <div className="flex flex-col gap-8">
         {/* Simple Skills */}

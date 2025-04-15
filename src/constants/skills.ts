@@ -10,6 +10,17 @@ export const SIMPLE_SKILLS = [
 
 export type SimpleSkill = (typeof SIMPLE_SKILLS)[number];
 
+// Attribute mappings for simple skills
+export const SIMPLE_SKILL_ATTRIBUTES: Record<string, string> = {
+  Potência: "Força",
+  Resistência: "Constituição",
+  "Coordenação Motora": "Destreza",
+  Sensibilidade: "Percepção",
+  Empatia: "Carisma",
+  Autoconhecimento: "Sabedoria",
+  Lógica: "Inteligência",
+};
+
 // Define the attributes for complex skills
 export const COMPLEX_SKILLS_ATTRIBUTES: Record<string, string> = {
   Acrobacia: "Destreza",
