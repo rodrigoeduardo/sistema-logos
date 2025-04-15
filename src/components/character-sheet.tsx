@@ -120,7 +120,7 @@ export default function CharacterSheet() {
   ]);
 
   return (
-    <div className="p-4 max-w-4xl mx-auto bg-white">
+    <div className="max-w-4xl bg-white">
       <Card className="p-6 space-y-8">
         <div className="flex gap-4">
           <EditableTitle title={title} setTitle={setTitle} />
@@ -385,7 +385,15 @@ export default function CharacterSheet() {
             className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
             onClick={() => {
               navigator.clipboard.writeText(
-                JSON.stringify({ title, basicStats, stats, skills })
+                JSON.stringify({
+                  title,
+                  basicStats,
+                  stats,
+                  skills,
+                  notes:
+                    (document.getElementById("notes") as HTMLTextAreaElement)
+                      ?.value ?? "",
+                })
               );
             }}
           >
