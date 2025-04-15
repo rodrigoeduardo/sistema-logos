@@ -68,8 +68,8 @@ export const DEFENSES_MODIFIERS = {
   fortitude: {
     base: 1,
     modifiers: [
-      { name: "forcaAtual", mod: 2 },
-      { name: "constituicaoAtual", mod: 3 },
+      { name: "forcaAtual", mod: 1 },
+      { name: "constituicaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
       { name: "fortitudeAlimento", label: "Alim.", custom: true },
       { name: "fortitudeOutros", label: "Outros", custom: true },
@@ -78,10 +78,9 @@ export const DEFENSES_MODIFIERS = {
   vontade: {
     base: 1,
     modifiers: [
-      { name: "constituicaoAtual", mod: 3 },
-      { name: "sabedoriaAtual", mod: 2 },
+      { name: "sabedoriaAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 1 },
-      { name: "carismaAtual", mod: 2 },
+      { name: "carismaAtual", mod: 1 },
       { name: "vontadeDescanso", label: "Desc.", custom: true },
       { name: "vontadeOutros", label: "Outros", custom: true },
     ],
@@ -89,9 +88,8 @@ export const DEFENSES_MODIFIERS = {
   reflexos: {
     base: 1,
     modifiers: [
-      { name: "destrezaAtual", mod: 3 },
-      { name: "percepcaoAtual", mod: 2 },
-      { name: "carismaAtual", mod: 1 },
+      { name: "destrezaAtual", mod: 2 },
+      { name: "percepcaoAtual", mod: 1 },
       { name: "reflexosArmaPrimaria", label: "ArmP.", custom: true },
       { name: "reflexosArmaSecundaria", label: "ArmS.", custom: true },
       { name: "reflexosOutros", label: "Outros", custom: true },
