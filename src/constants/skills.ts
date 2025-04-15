@@ -32,14 +32,14 @@ export const COMPLEX_SKILLS_ATTRIBUTES: Record<string, string> = {
   Persuasão: "Carisma",
   Prontidão: "Percepção",
   Raciocínio: "Inteligência",
-  "ZaConhecimento Específico": "Inteligência",
-  "ZzMagia de Água": "Inteligência",
-  "ZzMagia de Ar": "Inteligência",
-  "ZzMagia de Essência": "Inteligência",
-  "ZzMagia de Fogo": "Inteligência",
-  "ZzMagia de Morte": "Inteligência",
-  "ZzMagia de Terra": "Inteligência",
-  "ZzMagia de Vida": "Inteligência",
+  "Conhecimento Específico": "Inteligência",
+  "Magia de Água": "Inteligência",
+  "Magia de Ar": "Inteligência",
+  "Magia de Essência": "Inteligência",
+  "Magia de Fogo": "Inteligência",
+  "Magia de Morte": "Inteligência",
+  "Magia de Terra": "Inteligência",
+  "Magia de Vida": "Inteligência",
 };
 
 // Define the prerequisites for complex skills
