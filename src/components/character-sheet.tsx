@@ -7,13 +7,14 @@ import { DefenseRow } from "./defense-row";
 import { AttributeRow } from "./attribute-row";
 import { StatInput } from "./stat-input";
 import SkillsSheet from "./skills-sheet";
-import { initialStats } from "@/constants/initial-state";
+import { initialBasicStats, initialStats } from "@/constants/initial-state";
 import {
   ATTRIBUTES_MODIFIERS,
   DEFENSES_MODIFIERS,
 } from "@/constants/attributes-and-defenses";
 import EditableTitle from "./editable-title";
 import CodeRedemption from "./code-redemption";
+import { isBasicStat } from "@/utils/stats";
 
 export type SkillValues = {
   [key: string]: {
@@ -27,6 +28,9 @@ const ATTRIBUTE_EXP_MULTIPLIER = 5;
 export default function CharacterSheet() {
   const [title, setTitle] = useState("Ficha de Personagem");
 
+  const [basicStats, setBasicStats] = useState<{ [P: string]: number }>(
+    initialBasicStats
+  );
   const [stats, setStats] = useState<{ [P: string]: number }>(initialStats);
 
   const [skills, setSkills] = useState<SkillValues>({});
@@ -37,18 +41,18 @@ export default function CharacterSheet() {
 
     const intValue = Number.parseInt(value);
 
-    if (
-      name === "forcaAtual" ||
-      name === "constituicaoAtual" ||
-      name === "destrezaAtual" ||
-      name === "percepcaoAtual" ||
-      name === "inteligenciaAtual" ||
-      name === "sabedoriaAtual" ||
-      name === "carismaAtual"
-    ) {
+    if (name === "expTotais" || name === "expGastos") {
+      setBasicStats((prev) => ({
+        ...prev,
+        [name]: intValue,
+      }));
+
+      return;
+    } else if (isBasicStat(name)) {
       const expName = `${name.replace("Atual", "ExpGastos")}`;
-      const prevExpValue = stats[expName];
-      const expLeft = stats["expTotais"] - stats["expGastos"] + prevExpValue;
+      const prevExpValue = basicStats[expName];
+      const expLeft =
+        basicStats["expTotais"] - basicStats["expGastos"] + prevExpValue;
       const expCost =
         ((intValue * (intValue + 1)) / 2) * ATTRIBUTE_EXP_MULTIPLIER;
 
@@ -59,10 +63,22 @@ export default function CharacterSheet() {
         return;
       }
 
-      setStats((prev) => ({
+      setBasicStats((prev) => ({
         ...prev,
+        [name]: intValue,
         [expName]: expCost,
       }));
+
+      return;
+    } else if (name.includes("Custom")) {
+      const statName = name.replace("Custom", "");
+
+      setBasicStats((prev) => ({
+        ...prev,
+        [statName]: intValue,
+      }));
+
+      return;
     }
 
     setStats((prev) => ({
@@ -73,13 +89,13 @@ export default function CharacterSheet() {
 
   useEffect(() => {
     const attributes = [
-      stats.forcaExpGastos,
-      stats.constituicaoExpGastos,
-      stats.destrezaExpGastos,
-      stats.percepcaoExpGastos,
-      stats.inteligenciaExpGastos,
-      stats.sabedoriaExpGastos,
-      stats.carismaExpGastos,
+      basicStats.forcaExpGastos,
+      basicStats.constituicaoExpGastos,
+      basicStats.destrezaExpGastos,
+      basicStats.percepcaoExpGastos,
+      basicStats.inteligenciaExpGastos,
+      basicStats.sabedoriaExpGastos,
+      basicStats.carismaExpGastos,
     ];
 
     const attributesXp = attributes.reduce((acc, cur) => acc + cur, 0);
@@ -88,19 +104,19 @@ export default function CharacterSheet() {
       0
     );
 
-    setStats((prev) => ({
+    setBasicStats((prev) => ({
       ...prev,
       expGastos: attributesXp + skillsXp,
     }));
   }, [
-    stats.forcaExpGastos,
-    stats.constituicaoExpGastos,
-    stats.destrezaExpGastos,
-    stats.percepcaoExpGastos,
-    stats.inteligenciaExpGastos,
-    stats.sabedoriaExpGastos,
-    stats.carismaExpGastos,
     skills,
+    basicStats.forcaExpGastos,
+    basicStats.constituicaoExpGastos,
+    basicStats.destrezaExpGastos,
+    basicStats.percepcaoExpGastos,
+    basicStats.inteligenciaExpGastos,
+    basicStats.sabedoriaExpGastos,
+    basicStats.carismaExpGastos,
   ]);
 
   return (
@@ -111,6 +127,7 @@ export default function CharacterSheet() {
 
           <CodeRedemption
             setSkills={setSkills}
+            setBasicStats={setBasicStats}
             setStats={setStats}
             setTitle={setTitle}
           />
@@ -122,14 +139,14 @@ export default function CharacterSheet() {
           <div className="flex items-center gap-1">
             <StatInput
               name="expGastos"
-              value={stats["expGastos"]}
+              value={basicStats["expGastos"]}
               onChange={handleChange}
               label="Exp gastos"
             />
             <span>/</span>
             <StatInput
               name={"expTotais"}
-              value={stats["expTotais"]}
+              value={basicStats["expTotais"]}
               onChange={handleChange}
               label="Exp totais"
             />
@@ -143,7 +160,7 @@ export default function CharacterSheet() {
           <div className="flex flex-wrap gap-8">
             <AttributeRow
               title="Força"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="forcaAtual"
               expName="forcaExpGastos"
@@ -151,7 +168,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Constituição"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="constituicaoAtual"
               expName="constituicaoExpGastos"
@@ -159,7 +176,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Destreza"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="destrezaAtual"
               expName="destrezaExpGastos"
@@ -167,7 +184,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Percepção"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="percepcaoAtual"
               expName="percepcaoExpGastos"
@@ -175,7 +192,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Inteligência"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="inteligenciaAtual"
               expName="inteligenciaExpGastos"
@@ -183,7 +200,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Sabedoria"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="sabedoriaAtual"
               expName="sabedoriaExpGastos"
@@ -191,7 +208,7 @@ export default function CharacterSheet() {
 
             <AttributeRow
               title="Carisma"
-              stats={stats}
+              basicStats={basicStats}
               onChange={handleChange}
               currentName="carismaAtual"
               expName="carismaExpGastos"
@@ -203,7 +220,10 @@ export default function CharacterSheet() {
         <SkillsSheet
           skills={skills}
           setSkills={setSkills}
-          stats={stats}
+          stats={{
+            ...basicStats,
+            ...stats,
+          }}
           setStats={setStats}
         />
 
@@ -214,7 +234,9 @@ export default function CharacterSheet() {
           <div className="space-y-4">
             <StatRow
               title="Vitalidade"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="vitalidadeAtual"
               totalName="vitalidadeTotal"
@@ -224,7 +246,9 @@ export default function CharacterSheet() {
 
             <StatRow
               title="Reg. Vit"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="regVitAtual"
               totalName="regVitTotal"
@@ -234,7 +258,9 @@ export default function CharacterSheet() {
 
             <StatRow
               title="Estamina"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="estaminaAtual"
               totalName="estaminaTotal"
@@ -244,7 +270,9 @@ export default function CharacterSheet() {
 
             <StatRow
               title="Reg. Est"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="regEstAtual"
               totalName="regEstTotal"
@@ -254,7 +282,9 @@ export default function CharacterSheet() {
 
             <StatRow
               title="Mana"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="manaAtual"
               totalName="manaTotal"
@@ -264,7 +294,9 @@ export default function CharacterSheet() {
 
             <StatRow
               title="Reg. Man"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="regManAtual"
               totalName="regManTotal"
@@ -281,7 +313,9 @@ export default function CharacterSheet() {
           <div className="space-y-4">
             <DefenseRow
               title="Fortitude"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="fortitudeAtual"
               bonusName="fortitudeBon"
@@ -293,7 +327,9 @@ export default function CharacterSheet() {
 
             <DefenseRow
               title="Vontade"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="vontadeAtual"
               bonusName="vontadeBon"
@@ -305,7 +341,9 @@ export default function CharacterSheet() {
 
             <DefenseRow
               title="Reflexos"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="reflexosAtual"
               bonusName="reflexosBon"
@@ -317,7 +355,9 @@ export default function CharacterSheet() {
 
             <DefenseRow
               title="Fragilidade"
+              basicStats={basicStats}
               stats={stats}
+              setStats={setStats}
               onChange={handleChange}
               currentName="fragilidadeAtual"
               bonusName="fragilidadeBon"
@@ -334,7 +374,7 @@ export default function CharacterSheet() {
           <button
             className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
             onClick={() => {
-              console.log(stats, skills);
+              console.log(basicStats, stats, skills);
               window.print();
             }}
           >
@@ -345,7 +385,7 @@ export default function CharacterSheet() {
             className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
             onClick={() => {
               navigator.clipboard.writeText(
-                JSON.stringify({ title, stats, skills })
+                JSON.stringify({ title, basicStats, stats, skills })
               );
             }}
           >

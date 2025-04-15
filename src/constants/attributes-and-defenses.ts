@@ -9,7 +9,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "inteligenciaAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 2 },
       { name: "carismaAtual", mod: 1 },
-      { name: "vitalidadeOutros", mod: 1, label: "Outros" },
+      { name: "vitalidadeOutros", mod: 1, label: "Outros", custom: true },
     ],
   },
   regeneracaoVitalidade: {
@@ -21,7 +21,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "percepcaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
       { name: "carismaAtual", mod: 1 },
-      { name: "regVitOutros", label: "Outros" },
+      { name: "regVitOutros", label: "Outros", custom: true },
     ],
   },
   estamina: {
@@ -30,7 +30,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "forcaAtual", mod: 2 },
       { name: "constituicaoAtual", mod: 2 },
       { name: "sabedoriaAtual", mod: 1 },
-      { name: "estaminaOutros", label: "Outros" },
+      { name: "estaminaOutros", label: "Outros", custom: true },
     ],
   },
   regeneracaoEstamina: {
@@ -39,7 +39,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
-      { name: "regEstOutros", label: "Outros" },
+      { name: "regEstOutros", label: "Outros", custom: true },
     ],
   },
   mana: {
@@ -49,7 +49,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "sabedoriaAtual", mod: 2 },
       { name: "inteligenciaAtual", mod: 3 },
       { name: "carismaAtual", mod: 2 },
-      { name: "manaOutros", label: "Outros" },
+      { name: "manaOutros", label: "Outros", custom: true },
     ],
   },
   regeneracaoMana: {
@@ -59,7 +59,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "sabedoriaAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 2 },
       { name: "carismaAtual", mod: 1 },
-      { name: "regManOutros", label: "Outros" },
+      { name: "regManOutros", label: "Outros", custom: true },
     ],
   },
 };
@@ -71,8 +71,8 @@ export const DEFENSES_MODIFIERS = {
       { name: "forcaAtual", mod: 2 },
       { name: "constituicaoAtual", mod: 3 },
       { name: "sabedoriaAtual", mod: 1 },
-      { name: "fortitudeAlimento", label: "Alim." },
-      { name: "fortitudeOutros", label: "Outros" },
+      { name: "fortitudeAlimento", label: "Alim.", custom: true },
+      { name: "fortitudeOutros", label: "Outros", custom: true },
     ],
   },
   vontade: {
@@ -82,8 +82,8 @@ export const DEFENSES_MODIFIERS = {
       { name: "sabedoriaAtual", mod: 2 },
       { name: "inteligenciaAtual", mod: 1 },
       { name: "carismaAtual", mod: 2 },
-      { name: "vontadeDescanso", label: "Desc." },
-      { name: "vontadeOutros", label: "Outros" },
+      { name: "vontadeDescanso", label: "Desc.", custom: true },
+      { name: "vontadeOutros", label: "Outros", custom: true },
     ],
   },
   reflexos: {
@@ -92,9 +92,9 @@ export const DEFENSES_MODIFIERS = {
       { name: "destrezaAtual", mod: 3 },
       { name: "percepcaoAtual", mod: 2 },
       { name: "carismaAtual", mod: 1 },
-      { name: "reflexosArmaPrimaria", label: "ArmP." },
-      { name: "reflexosArmaSecundaria", label: "ArmS." },
-      { name: "reflexosOutros", label: "Outros" },
+      { name: "reflexosArmaPrimaria", label: "ArmP.", custom: true },
+      { name: "reflexosArmaSecundaria", label: "ArmS.", custom: true },
+      { name: "reflexosOutros", label: "Outros", custom: true },
     ],
   },
   fragilidade: {
@@ -104,7 +104,7 @@ export const DEFENSES_MODIFIERS = {
       { name: "percepcaoAtual", mod: 2 },
       { name: "sabedoriaAtual", mod: 1 },
       { name: "carismaAtual", mod: 1 },
-      { name: "fragilidadeOutros", label: "Outros" },
+      { name: "fragilidadeOutros", label: "Outros", custom: true },
     ],
   },
 };

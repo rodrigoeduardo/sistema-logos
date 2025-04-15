@@ -20,6 +20,11 @@ import { SkillValues } from "./character-sheet";
 interface CodeRedemptionProps {
   setTitle: Dispatch<SetStateAction<string>>;
   setSkills: Dispatch<SetStateAction<SkillValues>>;
+  setBasicStats: Dispatch<
+    SetStateAction<{
+      [P: string]: number;
+    }>
+  >;
   setStats: Dispatch<
     SetStateAction<{
       [P: string]: number;
@@ -30,6 +35,7 @@ interface CodeRedemptionProps {
 export default function CodeRedemption({
   setTitle,
   setSkills,
+  setBasicStats,
   setStats,
 }: CodeRedemptionProps) {
   const [open, setOpen] = useState(false);
@@ -44,9 +50,13 @@ export default function CodeRedemption({
       stats: {
         [P: string]: number;
       };
+      basicStats: {
+        [P: string]: number;
+      };
     } = JSON.parse(code);
 
     setTitle(data.title);
+    setBasicStats(data.basicStats);
     setStats(data.stats);
     setSkills(data.skills);
 
