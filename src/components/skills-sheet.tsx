@@ -244,6 +244,11 @@ export default function SkillsSheet({
         <div>
           <h3 className="font-medium mb-4">Perícias Simples</h3>
           <div className="flex flex-col gap-4">
+            {simpleSkills.length === 0 && (
+              <span className="text-muted-foreground text-sm">
+                Nenhuma perícia simples obtida.
+              </span>
+            )}
             {simpleSkills.map(([skill, values]) => (
               <div key={skill} className="flex items-center gap-2">
                 <Label className="w-28 text-right">{skill}:</Label>
@@ -297,6 +302,11 @@ export default function SkillsSheet({
         <div>
           <h3 className="font-medium mb-4">Perícias Complexas</h3>
           <div className="flex flex-col gap-4">
+            {complexSkills.length === 0 && (
+              <span className="text-muted-foreground text-sm">
+                Nenhuma perícia complexa obtida.
+              </span>
+            )}
             {complexSkills.map(([skill, values]) => (
               <div key={skill} className="flex items-center gap-2">
                 <Label className="w-28 text-right">{skill}:</Label>
@@ -354,6 +364,15 @@ export default function SkillsSheet({
             ))}
           </div>
         </div>
+        <Button
+          variant="outline"
+          className="mt-2 flex items-center gap-2 w-fit"
+          onClick={() => handleRollSkill("Perícia nível 0", 0)}
+          title="Rolar dados para perícia nível 0"
+        >
+          <Dice6 className="h-4 w-4" />
+          Perícia nível 0
+        </Button>
 
         {/* Form to add new skill */}
         <div className={Object.keys(skills).length > 0 ? "pt-4 border-t" : ""}>
