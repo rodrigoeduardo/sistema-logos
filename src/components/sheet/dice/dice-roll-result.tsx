@@ -13,7 +13,7 @@ export function DiceRollResult({ result }: DiceRollResultProps) {
       <div className="flex items-center gap-2">
         <span className="text-lg font-bold">{result.total}</span>
         <span className="text-sm text-gray-500">
-          ({result.diceNotation.join(" + ")})
+          ({result.diceNotation.join(" + ")} + Fortuna)
         </span>
       </div>
       <div className="flex flex-wrap gap-2">
