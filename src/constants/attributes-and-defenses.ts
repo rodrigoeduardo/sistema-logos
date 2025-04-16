@@ -70,7 +70,6 @@ export const DEFENSES_MODIFIERS = {
     modifiers: [
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 1 },
-      { name: "sabedoriaAtual", mod: 1 },
       { name: "fortitudeAlimento", label: "Alim.", custom: true },
       { name: "fortitudeOutros", label: "Outros", custom: true },
     ],
@@ -80,7 +79,6 @@ export const DEFENSES_MODIFIERS = {
     modifiers: [
       { name: "sabedoriaAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 1 },
-      { name: "carismaAtual", mod: 1 },
       { name: "vontadeDescanso", label: "Desc.", custom: true },
       { name: "vontadeOutros", label: "Outros", custom: true },
     ],
@@ -98,9 +96,6 @@ export const DEFENSES_MODIFIERS = {
   fragilidade: {
     base: 2,
     modifiers: [
-      { name: "constituicaoAtual", mod: 1 },
-      { name: "percepcaoAtual", mod: 2 },
-      { name: "sabedoriaAtual", mod: 1 },
       { name: "carismaAtual", mod: 1 },
       { name: "fragilidadeOutros", label: "Outros", custom: true },
     ],
