@@ -119,7 +119,7 @@ export default function SkillsSheet({
     let maxValue = 0;
     for (const [simpleSkill, minValue] of Object.entries(prerequisites)) {
       const simpleSkillValue = skills[simpleSkill]?.valor ?? 0;
-      if (simpleSkillValue < minValue) return 0;
+      if (simpleSkillValue < minValue) continue;
       maxValue += simpleSkillValue;
     }
     return maxValue;
@@ -165,25 +165,19 @@ export default function SkillsSheet({
 
     // For complex skills, check if the value is within allowed range
     if (COMPLEX_SKILLS_PREREQUISITES[skill]) {
-      // Check if any prerequisite has at least 1 point
-      const hasPrerequisite = Object.keys(
-        COMPLEX_SKILLS_PREREQUISITES[skill]
-      ).some((simpleSkill) => {
-        const simpleSkillValue = skills[simpleSkill]?.valor ?? 0;
-        return simpleSkillValue >= 1;
-      });
+      // Calculate maximum level based on sum of prerequisite levels
+      const prerequisites = COMPLEX_SKILLS_PREREQUISITES[skill];
+      let maxValue = 0;
 
-      if (!hasPrerequisite) {
-        alert(
-          `Você precisa ter pelo menos 1 ponto em uma das perícias simples necessárias para ${skill}`
-        );
-        return;
+      for (const [simpleSkill, minValue] of Object.entries(prerequisites)) {
+        const simpleSkillValue = skills[simpleSkill]?.valor ?? 0;
+        if (simpleSkillValue < minValue) continue;
+        maxValue += simpleSkillValue;
       }
 
-      // Allow at least level 1 if prerequisites are met
-      if (intValue > 1) {
+      if (intValue > maxValue) {
         alert(
-          `Você só pode ter nível 1 em ${skill} até ter mais pontos nas perícias simples necessárias`
+          `O valor máximo permitido para ${skill} é ${maxValue} (soma dos níveis das perícias simples necessárias)`
         );
         return;
       }
