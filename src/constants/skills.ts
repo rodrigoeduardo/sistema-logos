@@ -139,35 +139,35 @@ export const COMPLEX_SKILLS_PREREQUISITES: Record<
     Sensibilidade: 1,
     Lógica: 1,
   },
-  "ZaConhecimento Específico": {
+  "Conhecimento Específico": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Água": {
+  "Magia de Água": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Ar": {
+  "Magia de Ar": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Essência": {
+  "Magia de Essência": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Fogo": {
+  "Magia de Fogo": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Morte": {
+  "Magia de Morte": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Terra": {
+  "Magia de Terra": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "ZzMagia de Vida": {
+  "Magia de Vida": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
