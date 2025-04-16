@@ -130,16 +130,15 @@ export default function SkillsSheet({
     // Simple skills can always be added
     if (SIMPLE_SKILLS.includes(skillName as SimpleSkill)) return true;
 
-    // Complex skills need prerequisites
+    // Complex skills need at least 1 point in any prerequisite
     const prerequisites = COMPLEX_SKILLS_PREREQUISITES[skillName];
     if (!prerequisites) return false;
 
-    for (const [simpleSkill, minValue] of Object.entries(prerequisites)) {
+    // Check if any prerequisite has at least 1 point
+    return Object.keys(prerequisites).some((simpleSkill) => {
       const simpleSkillValue = skills[simpleSkill]?.valor ?? 0;
-      if (simpleSkillValue < minValue) return false;
-    }
-
-    return true;
+      return simpleSkillValue >= 1;
+    });
   };
 
   // Handle adding a new skill
