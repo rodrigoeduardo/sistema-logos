@@ -3,6 +3,7 @@ declare module "@3d-dice/dice-box" {
     assetPath: string;
     container: string;
     scale?: number;
+    theme?: string;
   }
 
   type DiceRollResult = {

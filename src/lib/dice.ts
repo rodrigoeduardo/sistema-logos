@@ -7,6 +7,7 @@ export const createDice = () => {
     diceInstance = new DiceBox({
       assetPath: "/assets/",
       container: "#dice-box",
+      theme: "diceOfRolling",
       scale: 9,
     });
   }
