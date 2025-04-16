@@ -165,10 +165,25 @@ export default function SkillsSheet({
 
     // For complex skills, check if the value is within allowed range
     if (COMPLEX_SKILLS_PREREQUISITES[skill]) {
-      const maxValue = getMaxComplexSkillValue(skill);
-      if (intValue > maxValue) {
+      // Check if any prerequisite has at least 1 point
+      const hasPrerequisite = Object.keys(
+        COMPLEX_SKILLS_PREREQUISITES[skill]
+      ).some((simpleSkill) => {
+        const simpleSkillValue = skills[simpleSkill]?.valor ?? 0;
+        return simpleSkillValue >= 1;
+      });
+
+      if (!hasPrerequisite) {
         alert(
-          `O valor máximo permitido para ${skill} é ${maxValue} (baseado nas perícias simples necessárias)`
+          `Você precisa ter pelo menos 1 ponto em uma das perícias simples necessárias para ${skill}`
+        );
+        return;
+      }
+
+      // Allow at least level 1 if prerequisites are met
+      if (intValue > 1) {
+        alert(
+          `Você só pode ter nível 1 em ${skill} até ter mais pontos nas perícias simples necessárias`
         );
         return;
       }
