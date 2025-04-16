@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Code } from "lucide-react";
 import { SkillValues } from "../character-sheet";
+import { toast } from "sonner";
 
 interface CodeRedemptionProps {
   setTitle: Dispatch<SetStateAction<string>>;
@@ -62,12 +63,14 @@ export default function CodeRedemption({
 
     setCode("");
     setOpen(false);
+
+    toast.success("Ficha importada com sucesso");
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" size="icon">
           <Code />
         </Button>
       </DialogTrigger>
@@ -82,7 +85,7 @@ export default function CodeRedemption({
           <div className="grid gap-4 py-4">
             <Input
               id="code"
-              placeholder="Digite o código aqui"
+              placeholder="Insira o código aqui"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               className="w-full"

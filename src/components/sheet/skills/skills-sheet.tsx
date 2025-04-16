@@ -24,6 +24,7 @@ import {
 import { LEVEL_DICE } from "@/constants/dice-levels";
 import { rollDice, RollResult } from "@/utils/rolls";
 import { DiceRollResult } from "../dice/dice-roll-result";
+import { cn } from "@/lib/utils";
 
 interface SkillsSheetProps {
   skills: SkillValues;
@@ -388,9 +389,10 @@ export default function SkillsSheet({
             ))}
           </div>
         </div>
+
         <Button
           variant="outline"
-          className="mt-2 flex items-center gap-2 w-fit"
+          className="mt-2 flex items-center gap-2 w-fit print:hidden"
           onClick={() => handleRollSkill("Perícia nível 0", 0)}
           title="Rolar dados para perícia nível 0"
         >
@@ -399,7 +401,11 @@ export default function SkillsSheet({
         </Button>
 
         {/* Form to add new skill */}
-        <div className={Object.keys(skills).length > 0 ? "pt-4 border-t" : ""}>
+        <div
+          className={cn("print:hidden", {
+            "pt-4 border-t": Object.keys(skills).length > 0,
+          })}
+        >
           <h3 className="font-medium mb-4">Adicionar nova perícia</h3>
           <div className="flex items-end gap-2">
             <div className="flex flex-col gap-2">

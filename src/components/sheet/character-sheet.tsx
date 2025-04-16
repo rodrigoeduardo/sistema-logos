@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { Card } from "@/components/ui/card";
 import { StatRow } from "./stats/stat-row";
 import { DefenseRow } from "./defenses/defense-row";
@@ -15,6 +15,10 @@ import {
 import EditableTitle from "./misc/editable-title";
 import CodeRedemption from "./misc/code-redemption";
 import { isBasicStat } from "@/utils/stats";
+import { Button } from "../ui/button";
+import { Copy, Printer } from "lucide-react";
+import { toast } from "sonner";
+import { useReactToPrint } from "react-to-print";
 
 export type SkillValues = {
   [key: string]: {
@@ -26,6 +30,11 @@ export type SkillValues = {
 const ATTRIBUTE_EXP_MULTIPLIER = 5;
 
 export default function CharacterSheet() {
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const printSheet = useReactToPrint({
+    contentRef: sheetRef,
+  });
+
   const [title, setTitle] = useState("Ficha de Personagem");
 
   const [basicStats, setBasicStats] = useState<{ [P: string]: number }>(
@@ -119,18 +128,44 @@ export default function CharacterSheet() {
     basicStats.carismaExpGastos,
   ]);
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      JSON.stringify({
+        title,
+        basicStats,
+        stats,
+        skills,
+        notes:
+          (document.getElementById("notes") as HTMLTextAreaElement)?.value ??
+          "",
+      })
+    );
+
+    toast.success("Código da ficha copiado para a área de transferência");
+  };
+
   return (
-    <div className="max-w-4xl bg-white">
+    <div className="max-w-4xl bg-white" ref={sheetRef}>
       <Card className="p-6 space-y-8">
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <EditableTitle title={title} setTitle={setTitle} />
 
-          <CodeRedemption
-            setSkills={setSkills}
-            setBasicStats={setBasicStats}
-            setStats={setStats}
-            setTitle={setTitle}
-          />
+          <div className="flex gap-2 print:hidden">
+            <Button variant="outline" size="icon" onClick={() => printSheet()}>
+              <Printer />
+            </Button>
+
+            <Button variant="outline" size="icon" onClick={handleCopy}>
+              <Copy />
+            </Button>
+
+            <CodeRedemption
+              setSkills={setSkills}
+              setBasicStats={setBasicStats}
+              setStats={setStats}
+              setTitle={setTitle}
+            />
+          </div>
         </div>
 
         {/* EXP Total */}
@@ -369,38 +404,6 @@ export default function CharacterSheet() {
             />
           </div>
         </section>
-
-        {/* Save Button */}
-        <div className="flex justify-end gap-4">
-          <button
-            className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
-            onClick={() => {
-              console.log(basicStats, stats, skills);
-              window.print();
-            }}
-          >
-            Imprimir
-          </button>
-
-          <button
-            className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 cursor-pointer"
-            onClick={() => {
-              navigator.clipboard.writeText(
-                JSON.stringify({
-                  title,
-                  basicStats,
-                  stats,
-                  skills,
-                  notes:
-                    (document.getElementById("notes") as HTMLTextAreaElement)
-                      ?.value ?? "",
-                })
-              );
-            }}
-          >
-            Copiar Código
-          </button>
-        </div>
       </Card>
     </div>
   );
