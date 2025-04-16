@@ -2,6 +2,7 @@
 import DiceBox from "@/components/sheet/dice/dice-box";
 import CharacterSheet from "@/components/sheet/character-sheet";
 import NotesBox from "@/components/sheet/misc/notes-box";
+import MomentTracker from "@/components/moment-tracker";
 
 export default function Ficha() {
   return (
@@ -12,6 +13,8 @@ export default function Ficha() {
         <NotesBox />
 
         <DiceBox />
+
+        <MomentTracker initialMoment="A" initialPosition={0} />
       </div>
     </main>
   );
