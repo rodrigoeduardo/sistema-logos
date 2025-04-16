@@ -66,7 +66,7 @@ export const ATTRIBUTES_MODIFIERS = {
 
 export const DEFENSES_MODIFIERS = {
   fortitude: {
-    base: 1,
+    base: 4,
     modifiers: [
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 1 },
@@ -76,7 +76,7 @@ export const DEFENSES_MODIFIERS = {
     ],
   },
   vontade: {
-    base: 1,
+    base: 4,
     modifiers: [
       { name: "sabedoriaAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 1 },
@@ -86,7 +86,7 @@ export const DEFENSES_MODIFIERS = {
     ],
   },
   reflexos: {
-    base: 1,
+    base: 4,
     modifiers: [
       { name: "destrezaAtual", mod: 2 },
       { name: "percepcaoAtual", mod: 1 },
@@ -96,7 +96,7 @@ export const DEFENSES_MODIFIERS = {
     ],
   },
   fragilidade: {
-    base: 1,
+    base: 2,
     modifiers: [
       { name: "constituicaoAtual", mod: 1 },
       { name: "percepcaoAtual", mod: 2 },
