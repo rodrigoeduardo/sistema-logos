@@ -84,7 +84,7 @@ export const DEFENSES_MODIFIERS = {
   reflexos: {
     base: 4,
     modifiers: [
-      { name: "destrezaAtual", mod: 2 },
+      { name: "destrezaAtual", mod: 1 },
       { name: "percepcaoAtual", mod: 1 },
       { name: "reflexosArmaPrimaria", label: "ArmP.", custom: true },
       { name: "reflexosArmaSecundaria", label: "ArmS.", custom: true },
