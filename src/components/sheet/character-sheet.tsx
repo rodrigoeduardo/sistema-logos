@@ -2,18 +2,18 @@
 
 import { useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "@/components/ui/card";
-import { StatRow } from "./stat-row";
-import { DefenseRow } from "./defense-row";
-import { AttributeRow } from "./attribute-row";
-import { StatInput } from "./stat-input";
-import SkillsSheet from "./skills-sheet";
+import { StatRow } from "./stats/stat-row";
+import { DefenseRow } from "./defenses/defense-row";
+import { AttributeRow } from "./attributes/attribute-row";
+import { StatInput } from "./stats/stat-input";
+import SkillsSheet from "./skills/skills-sheet";
 import { initialBasicStats, initialStats } from "@/constants/initial-state";
 import {
   ATTRIBUTES_MODIFIERS,
   DEFENSES_MODIFIERS,
 } from "@/constants/attributes-and-defenses";
-import EditableTitle from "./editable-title";
-import CodeRedemption from "./code-redemption";
+import EditableTitle from "./misc/editable-title";
+import CodeRedemption from "./misc/code-redemption";
 import { isBasicStat } from "@/utils/stats";
 
 export type SkillValues = {
@@ -142,6 +142,7 @@ export default function CharacterSheet() {
               value={basicStats["expGastos"]}
               onChange={handleChange}
               label="Exp gastos"
+              readOnly
             />
             <span>/</span>
             <StatInput

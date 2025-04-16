@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Trash2, Dice6 } from "lucide-react";
-import { SkillValues } from "./character-sheet";
+import { SkillValues } from "../character-sheet";
 import {
   SIMPLE_SKILLS,
   COMPLEX_SKILLS_PREREQUISITES,
@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import { LEVEL_DICE } from "@/constants/dice-levels";
 import { rollDice, RollResult } from "@/utils/rolls";
-import { SkillRoll } from "./SkillRoll";
+import { DiceRollResult } from "../dice/dice-roll-result";
 
 interface SkillsSheetProps {
   skills: SkillValues;
@@ -163,6 +163,11 @@ export default function SkillsSheet({
 
     const intValue = Number.parseInt(value);
 
+    if (intValue < 0) {
+      alert("O valor da perícia não pode ser negativo");
+      return;
+    }
+
     // For complex skills, check if the value is within allowed range
     if (COMPLEX_SKILLS_PREREQUISITES[skill]) {
       // Calculate maximum level based on sum of prerequisite levels
@@ -254,7 +259,7 @@ export default function SkillsSheet({
 
       {lastRollResult && (
         <div className="mb-4 p-4 border rounded-lg bg-gray-50">
-          <SkillRoll result={lastRollResult} />
+          <DiceRollResult result={lastRollResult} />
         </div>
       )}
 

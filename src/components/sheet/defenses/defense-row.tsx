@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, type ChangeEvent } from "react";
-import { StatInput } from "./stat-input";
+import { StatInput } from "../stats/stat-input";
 import { getStatLabel } from "@/utils/stats";
 import { StatModifier } from "@/app/types/stats";
 
@@ -86,6 +86,7 @@ export function DefenseRow({
               value={stats[totalName]}
               onChange={onChange}
               label="Total"
+              readOnly
             />
           </div>
         </div>
@@ -108,6 +109,7 @@ export function DefenseRow({
                     value={basicStats[mod.name] * (mod.mod ?? 1)}
                     onChange={onChange}
                     label={mod.label ?? getStatLabel(mod.name, mod.mod)}
+                    readOnly={!mod.custom}
                   />
                   {mod.name !== modifiers[modifiers.length - 1].name && (
                     <span>+</span>

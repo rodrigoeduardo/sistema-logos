@@ -15,7 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Code } from "lucide-react";
-import { SkillValues } from "./character-sheet";
+import { SkillValues } from "../character-sheet";
 
 interface CodeRedemptionProps {
   setTitle: Dispatch<SetStateAction<string>>;

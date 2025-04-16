@@ -19,7 +19,7 @@ export function StatInput({
   onChange,
   label,
   readOnly,
-  min = 0,
+  min,
   max = 999,
   className = "",
 }: StatInputProps) {

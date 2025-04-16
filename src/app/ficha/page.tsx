@@ -1,6 +1,7 @@
 "use client";
-import DiceBox from "@/components/dice-box";
-import CharacterSheet from "@/components/character-sheet";
+import DiceBox from "@/components/sheet/dice/dice-box";
+import CharacterSheet from "@/components/sheet/character-sheet";
+import NotesBox from "@/components/sheet/misc/notes-box";
 
 export default function Ficha() {
   return (
@@ -8,15 +9,7 @@ export default function Ficha() {
       <CharacterSheet />
 
       <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-bold">Anotações</h2>
-          <textarea
-            id="notes"
-            rows={10}
-            placeholder="Escreva aqui..."
-            className="rounded-xl p-2 shadow-sm border"
-          />
-        </div>
+        <NotesBox />
 
         <DiceBox />
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ChangeEvent } from "react";
-import { StatInput } from "./stat-input";
+import { StatInput } from "../stats/stat-input";
 
 interface AttributeRowProps {
   title: string;
@@ -27,6 +27,7 @@ export function AttributeRow({
           value={basicStats[currentName]}
           onChange={onChange}
           label="Valor"
+          min={0}
         />
         <span>/</span>
         <StatInput
@@ -34,6 +35,7 @@ export function AttributeRow({
           value={basicStats[expName]}
           onChange={onChange}
           label="Exp gastos"
+          readOnly
         />
       </div>
     </div>

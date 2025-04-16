@@ -2,8 +2,8 @@
 
 import { createDice, getDice } from "@/lib/dice";
 import { useEffect, useState, useRef } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { Dice6 } from "lucide-react";
 
 export default function DiceBox() {
@@ -47,8 +47,6 @@ export default function DiceBox() {
       .split(/[+-]/)
       .map((expr) => expr.trim())
       .filter((expr) => /^\d+d\d+$/.test(expr));
-
-    console.log(notation, notationArray);
 
     if (notationArray.length > 0) {
       dice.roll(notationArray);

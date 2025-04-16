@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, type ChangeEvent } from "react";
-import { StatInput } from "./stat-input";
+import { StatInput } from "../stats/stat-input";
 import { getStatLabel } from "@/utils/stats";
 import { StatModifier } from "@/app/types/stats";
 
@@ -66,6 +66,7 @@ export function StatRow({
               value={stats[totalName]}
               onChange={onChange}
               label="Total"
+              readOnly
             />
           </div>
         </div>

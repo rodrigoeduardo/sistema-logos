@@ -1,13 +1,13 @@
 import { RollResult } from "@/utils/rolls";
-import { DiceIcon } from "./DiceIcon";
+import { DiceIcon } from "./dice-icon";
 
-interface SkillRollProps {
+interface DiceRollResultProps {
   result: RollResult;
 }
 
 type DiceType = "d4" | "d6" | "d8" | "d10" | "d12" | "d20";
 
-export function SkillRoll({ result }: SkillRollProps) {
+export function DiceRollResult({ result }: DiceRollResultProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
