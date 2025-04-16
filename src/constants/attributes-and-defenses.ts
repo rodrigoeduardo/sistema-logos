@@ -17,7 +17,6 @@ export const ATTRIBUTES_MODIFIERS = {
     modifiers: [
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 2 },
-      { name: "destrezaAtual", mod: 1 },
       { name: "percepcaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
       { name: "carismaAtual", mod: 1 },
@@ -27,9 +26,9 @@ export const ATTRIBUTES_MODIFIERS = {
   estamina: {
     base: 2,
     modifiers: [
-      { name: "forcaAtual", mod: 2 },
+      { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 2 },
-      { name: "sabedoriaAtual", mod: 1 },
+      { name: "destrezaAtual", mod: 1 },
       { name: "estaminaOutros", label: "Outros", custom: true },
     ],
   },
@@ -38,16 +37,15 @@ export const ATTRIBUTES_MODIFIERS = {
     modifiers: [
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 1 },
-      { name: "sabedoriaAtual", mod: 1 },
       { name: "regEstOutros", label: "Outros", custom: true },
     ],
   },
   mana: {
     base: 4,
     modifiers: [
-      { name: "constituicaoAtual", mod: 1 },
-      { name: "sabedoriaAtual", mod: 2 },
-      { name: "inteligenciaAtual", mod: 3 },
+      { name: "percepcaoAtual", mod: 1 },
+      { name: "sabedoriaAtual", mod: 3 },
+      { name: "inteligenciaAtual", mod: 2 },
       { name: "carismaAtual", mod: 2 },
       { name: "manaOutros", label: "Outros", custom: true },
     ],
@@ -55,9 +53,9 @@ export const ATTRIBUTES_MODIFIERS = {
   regeneracaoMana: {
     base: 2,
     modifiers: [
-      { name: "constituicaoAtual", mod: 1 },
+      { name: "percepcaoAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 1 },
-      { name: "inteligenciaAtual", mod: 2 },
+      { name: "inteligenciaAtual", mod: 1 },
       { name: "carismaAtual", mod: 1 },
       { name: "regManOutros", label: "Outros", custom: true },
     ],
