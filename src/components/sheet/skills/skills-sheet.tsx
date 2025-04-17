@@ -2,7 +2,6 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Trash2, Dice6 } from "lucide-react";
 import { SkillValues } from "../character-sheet";
@@ -25,6 +24,11 @@ import { LEVEL_DICE } from "@/constants/dice-levels";
 import { rollDice, RollResult } from "@/utils/rolls";
 import { DiceRollResult } from "../dice/dice-roll-result";
 import { cn } from "@/lib/utils";
+import { StatInput } from "../stats/stat-input";
+import { Tooltip } from "@/components/ui/tooltip";
+import { TooltipContent } from "@/components/ui/tooltip";
+import { TooltipTrigger } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 interface SkillsSheetProps {
   skills: SkillValues;
@@ -271,126 +275,150 @@ export default function SkillsSheet({
       )}
 
       <div className="flex flex-col gap-8">
-        {/* Simple Skills */}
-        <div>
-          <h3 className="font-medium mb-4">Perícias Simples</h3>
-          <div className="flex flex-col gap-4">
-            {simpleSkills.length === 0 && (
-              <span className="text-muted-foreground text-sm">
-                Nenhuma perícia simples obtida.
-              </span>
-            )}
-            {simpleSkills.map(([skill, values]) => (
-              <div key={skill} className="flex items-center gap-2">
-                <Label className="w-28 text-right">{skill}:</Label>
-                <div className="flex items-center gap-2">
-                  <Input
-                    className="w-16"
-                    type="number"
-                    value={values.valor}
-                    onChange={(e) => handleUpdateSkill(skill, e.target.value)}
-                  />
-                  <span>/</span>
-                  <Input
-                    className="w-20"
-                    type="number"
-                    value={values.expGastos}
-                    readOnly
-                  />
-                </div>
-                <div className="flex flex-col text-xs text-muted-foreground">
-                  <span>Valor</span>
-                  <span>Exp gastos</span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-100"
-                  onClick={() => handleDeleteSkill(skill)}
-                  title="Excluir perícia"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  <span className="sr-only">Excluir {skill}</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-blue-500 hover:text-blue-700 hover:bg-blue-100"
-                  onClick={() => handleRollSkill(skill, values.valor)}
-                  title={`Rolar dados (${
-                    LEVEL_DICE[values.valor] || "Nível inválido"
-                  })`}
-                >
-                  <Dice6 className="h-4 w-4" />
-                  <span className="sr-only">Rolar dados para {skill}</span>
-                </Button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="flex gap-8">
+          {/* Simple Skills */}
+          <div className="flex-1">
+            <h3 className="font-medium mb-4">Perícias Simples</h3>
+            <div className="flex flex-col gap-4">
+              {simpleSkills.length === 0 && (
+                <span className="text-muted-foreground text-sm">
+                  Nenhuma perícia simples obtida.
+                </span>
+              )}
+              {simpleSkills.map(([skill, values]) => (
+                <div key={skill} className="flex items-center gap-2">
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Label className="w-28 text-right truncate">
+                          {skill}:
+                        </Label>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <Label className="text-md font-bold">{skill}</Label>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
 
-        {/* Complex Skills */}
-        <div>
-          <h3 className="font-medium mb-4">Perícias Complexas</h3>
-          <div className="flex flex-col gap-4">
-            {complexSkills.length === 0 && (
-              <span className="text-muted-foreground text-sm">
-                Nenhuma perícia complexa obtida.
-              </span>
-            )}
-            {complexSkills.map(([skill, values]) => (
-              <div key={skill} className="flex items-center gap-2">
-                <Label className="w-28 text-right">{skill}:</Label>
-                <div className="flex items-center gap-2">
-                  <Input
-                    className="w-16"
-                    type="number"
-                    value={values.valor}
-                    onChange={(e) => handleUpdateSkill(skill, e.target.value)}
-                  />
-                  <span>/</span>
-                  <Input
-                    className="w-20"
-                    type="number"
-                    value={values.expGastos}
-                    readOnly
-                  />
+                  <div className="flex items-center gap-2">
+                    <StatInput
+                      name={`${skill}-valor`}
+                      value={values.valor}
+                      onChange={(e) => handleUpdateSkill(skill, e.target.value)}
+                      label="Valor"
+                      min={0}
+                    />
+                    <span>/</span>
+                    <StatInput
+                      name={`${skill}-exp`}
+                      value={values.expGastos}
+                      readOnly
+                      label="Exp gastos"
+                      onChange={() => {}}
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-100"
+                    onClick={() => handleDeleteSkill(skill)}
+                    title="Excluir perícia"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Excluir {skill}</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-blue-500 hover:text-blue-700 hover:bg-blue-100"
+                    onClick={() => handleRollSkill(skill, values.valor)}
+                    title={`Rolar dados (${
+                      LEVEL_DICE[values.valor] || "Nível inválido"
+                    })`}
+                  >
+                    <Dice6 className="h-4 w-4" />
+                    <span className="sr-only">Rolar dados para {skill}</span>
+                  </Button>
                 </div>
-                <div className="flex flex-col text-xs text-muted-foreground">
-                  <span>Valor</span>
-                  <span>Exp gastos</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Complex Skills */}
+          <div className="flex-1">
+            <h3 className="font-medium mb-4">Perícias Complexas</h3>
+            <div className="flex flex-col gap-4">
+              {complexSkills.length === 0 && (
+                <span className="text-muted-foreground text-sm">
+                  Nenhuma perícia complexa obtida.
+                </span>
+              )}
+              {complexSkills.map(([skill, values]) => (
+                <div key={skill} className="flex items-center gap-2">
+                  <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Label className="w-28 text-right truncate">
+                          {skill}:
+                        </Label>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <div className="flex flex-col gap-1">
+                          <Label className="text-md font-bold">{skill}</Label>
+                          <span className="font-medium">Pré-requisitos:</span>
+                          {Object.entries(
+                            COMPLEX_SKILLS_PREREQUISITES[skill] || {}
+                          ).map(([reqSkill, minValue]) => (
+                            <span key={reqSkill}>
+                              {reqSkill} ≥ {minValue}
+                            </span>
+                          ))}
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <div className="flex items-center gap-2">
+                    <StatInput
+                      name={`${skill}-valor`}
+                      value={values.valor}
+                      onChange={(e) => handleUpdateSkill(skill, e.target.value)}
+                      label={`Valor (Max: ${getMaxComplexSkillValue(skill)})`}
+                      min={0}
+                      max={getMaxComplexSkillValue(skill)}
+                    />
+                    <span>/</span>
+                    <StatInput
+                      name={`${skill}-exp`}
+                      value={values.expGastos}
+                      readOnly
+                      label="Exp gastos"
+                      onChange={() => {}}
+                    />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-100"
+                    onClick={() => handleDeleteSkill(skill)}
+                    title="Excluir perícia"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Excluir {skill}</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-blue-500 hover:text-blue-700 hover:bg-blue-100"
+                    onClick={() => handleRollSkill(skill, values.valor)}
+                    title={`Rolar dados`}
+                  >
+                    <Dice6 className="h-4 w-4" />
+                    <span className="sr-only">Rolar dados para {skill}</span>
+                  </Button>
                 </div>
-                <div className="flex flex-col text-xs text-muted-foreground ml-2">
-                  <span>Max: {getMaxComplexSkillValue(skill)}</span>
-                  <span>
-                    Req:{" "}
-                    {Object.entries(COMPLEX_SKILLS_PREREQUISITES[skill] || {})
-                      .map(([skill, value]) => `${skill}=${value}`)
-                      .join(", ")}
-                  </span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-red-500 hover:text-red-700 hover:bg-red-100"
-                  onClick={() => handleDeleteSkill(skill)}
-                  title="Excluir perícia"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  <span className="sr-only">Excluir {skill}</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-blue-500 hover:text-blue-700 hover:bg-blue-100"
-                  onClick={() => handleRollSkill(skill, values.valor)}
-                  title={`Rolar dados`}
-                >
-                  <Dice6 className="h-4 w-4" />
-                  <span className="sr-only">Rolar dados para {skill}</span>
-                </Button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
