@@ -1,9 +1,18 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, type ChangeEvent } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  type ChangeEvent,
+} from "react";
 import { StatInput } from "../stats/stat-input";
 import { getStatLabel } from "@/utils/stats";
 import { StatModifier } from "@/app/types/stats";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface StatRowProps {
   title: string;
@@ -32,6 +41,8 @@ export function StatRow({
   totalName,
   modifiers,
 }: StatRowProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   useEffect(() => {
     const total =
       baseValue +
@@ -68,10 +79,31 @@ export function StatRow({
               label="Total"
               readOnly
             />
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="h-6 w-6"
+            >
+              {isExpanded ? (
+                <ChevronUp className="h-4 w-4" />
+              ) : (
+                <ChevronDown className="h-4 w-4" />
+              )}
+            </Button>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 ml-2">
+        <div
+          className={cn(
+            "flex flex-wrap items-center gap-2 ml-2 transition-all duration-500 ease-in-out",
+            {
+              "max-h-0 opacity-0 overflow-hidden": !isExpanded,
+              "max-h-96 opacity-100": isExpanded,
+            }
+          )}
+        >
           <span className="text-sm">= {baseValue} +</span>
           <div className="flex flex-wrap items-center gap-2">
             {modifiers.map((mod) => {
