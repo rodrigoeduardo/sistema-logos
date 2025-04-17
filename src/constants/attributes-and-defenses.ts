@@ -9,7 +9,7 @@ export const ATTRIBUTES_MODIFIERS = {
       { name: "inteligenciaAtual", mod: 1 },
       { name: "sabedoriaAtual", mod: 2 },
       { name: "carismaAtual", mod: 1 },
-      { name: "vitalidadeOutros", mod: 1, label: "Outros", custom: true },
+      { name: "vitalidadeOutros", label: "Outros", custom: true },
     ],
   },
   regeneracaoVitalidade: {
@@ -69,6 +69,7 @@ export const DEFENSES_MODIFIERS = {
       { name: "forcaAtual", mod: 1 },
       { name: "constituicaoAtual", mod: 1 },
       { name: "fortitudeAlimento", label: "Alim.", custom: true },
+      { name: "fortitudeDescanso", label: "Desc.", custom: true },
       { name: "fortitudeOutros", label: "Outros", custom: true },
     ],
   },
@@ -77,6 +78,7 @@ export const DEFENSES_MODIFIERS = {
     modifiers: [
       { name: "sabedoriaAtual", mod: 1 },
       { name: "inteligenciaAtual", mod: 1 },
+      { name: "vontadeAlimento", label: "Alim.", custom: true },
       { name: "vontadeDescanso", label: "Desc.", custom: true },
       { name: "vontadeOutros", label: "Outros", custom: true },
     ],
