@@ -145,10 +145,29 @@ export default function CharacterSheet() {
   };
 
   return (
-    <div className="max-w-4xl bg-white" ref={sheetRef}>
-      <Card className="p-6 space-y-8">
+    <div className="w-screen bg-white" ref={sheetRef}>
+      <Card className="p-6">
         <div className="flex gap-2">
           <EditableTitle title={title} setTitle={setTitle} />
+
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-xl">EXP:</span>
+            <div className="flex items-center gap-1">
+              <StatInput
+                name="expGastos"
+                value={basicStats["expGastos"]}
+                onChange={handleChange}
+                label="Exp gastos"
+                readOnly
+              />
+              <span>/</span>
+              <StatInput
+                name={"expTotais"}
+                value={basicStats["expTotais"]}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
 
           <div className="flex gap-2 print:hidden">
             <Button variant="outline" size="icon" onClick={() => printSheet()}>
@@ -168,32 +187,11 @@ export default function CharacterSheet() {
           </div>
         </div>
 
-        {/* EXP Total */}
-        <div className="flex items-center gap-2">
-          <span className="font-semibold min-w-24">Experiência:</span>
-          <div className="flex items-center gap-1">
-            <StatInput
-              name="expGastos"
-              value={basicStats["expGastos"]}
-              onChange={handleChange}
-              label="Exp gastos"
-              readOnly
-            />
-            <span>/</span>
-            <StatInput
-              name={"expTotais"}
-              value={basicStats["expTotais"]}
-              onChange={handleChange}
-              label="Exp totais"
-            />
-          </div>
-        </div>
-
         {/* Atributos */}
         <section>
           <h2 className="text-xl font-bold mb-4">Atributos (EXP X5)</h2>
 
-          <div className="flex flex-wrap gap-8">
+          <div className="grid grid-cols-4 gap-2">
             <AttributeRow
               title="Força"
               basicStats={basicStats}
