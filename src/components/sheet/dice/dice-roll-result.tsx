@@ -21,10 +21,14 @@ export function DiceRollResult({ result }: DiceRollResultProps) {
     fortuneRolls[0].value === fortuneRolls[1].value &&
     fortuneRolls[0].value >= 6;
 
-  // Check for Crítico
-  const isCriticoDesastre =
+  // Check for Duplo and Triplo
+  const isDesastreDuplo =
+    fortuneRolls[0].value === 1 && fortuneRolls[1].value === 1;
+  const isDesastreTriplo =
     fortuneRolls[0].value === 1 && fortuneRolls[1].value === 10;
-  const isCriticoTriunfo =
+  const isTriunfoDuplo =
+    fortuneRolls[0].value === 10 && fortuneRolls[1].value === 10;
+  const isTriunfoTriplo =
     fortuneRolls[0].value === 10 && fortuneRolls[1].value === 1;
 
   return (
@@ -34,26 +38,38 @@ export function DiceRollResult({ result }: DiceRollResultProps) {
         <span className="text-sm text-gray-500">
           ({result.diceNotation.join(" + ")} + Fortuna)
         </span>
-        {(isDesastre || isCriticoDesastre) && (
+        {(isDesastre || isDesastreDuplo || isDesastreTriplo) && (
           <div className="flex items-center gap-1 text-red-600">
             <AlertTriangle className="w-4 h-4" />
             <span className="text-sm font-medium">Desastre</span>
-            {isCriticoDesastre && (
+            {isDesastreDuplo && (
               <div className="flex items-center gap-1 text-red-600">
                 <Zap className="w-4 h-4" />
-                <span className="text-sm font-medium">Crítico</span>
+                <span className="text-sm font-medium">Duplo</span>
+              </div>
+            )}
+            {isDesastreTriplo && (
+              <div className="flex items-center gap-1 text-red-600">
+                <Zap className="w-4 h-4" />
+                <span className="text-sm font-medium">Triplo</span>
               </div>
             )}
           </div>
         )}
-        {(isTriunfo || isCriticoTriunfo) && (
+        {(isTriunfo || isTriunfoDuplo || isTriunfoTriplo) && (
           <div className="flex items-center gap-1 text-yellow-600">
             <Crown className="w-4 h-4" />
             <span className="text-sm font-medium">Triunfo</span>
-            {isCriticoTriunfo && (
+            {isTriunfoDuplo && (
               <div className="flex items-center gap-1 text-yellow-600">
                 <Zap className="w-4 h-4" />
-                <span className="text-sm font-medium">Crítico</span>
+                <span className="text-sm font-medium">Duplo</span>
+              </div>
+            )}
+            {isTriunfoTriplo && (
+              <div className="flex items-center gap-1 text-yellow-600">
+                <Zap className="w-4 h-4" />
+                <span className="text-sm font-medium">Triplo</span>
               </div>
             )}
           </div>
