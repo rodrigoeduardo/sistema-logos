@@ -8,6 +8,7 @@ export const createDice = () => {
       assetPath: "/assets/",
       container: "#dice-box",
       theme: "diceOfRolling",
+      gravity: 2,
       scale: 9,
     });
   }
