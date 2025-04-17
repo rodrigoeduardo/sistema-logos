@@ -63,14 +63,12 @@ export function rollDice(
     if (statKey) {
       attributeLevel = stats[statKey] || 0;
     }
-  } else {
+  } else if (COMPLEX_SKILLS_ATTRIBUTES[skillName]) {
     // For complex skills, use the attribute from COMPLEX_SKILLS_ATTRIBUTES
     const attribute = COMPLEX_SKILLS_ATTRIBUTES[skillName];
-    if (attribute) {
-      const statKey = ATTRIBUTE_TO_STAT[attribute];
-      if (statKey) {
-        attributeLevel = stats[statKey] || 0;
-      }
+    const statKey = ATTRIBUTE_TO_STAT[attribute];
+    if (statKey) {
+      attributeLevel = stats[statKey] || 0;
     }
   }
 

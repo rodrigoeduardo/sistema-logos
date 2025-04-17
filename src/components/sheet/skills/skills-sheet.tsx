@@ -144,12 +144,18 @@ export default function SkillsSheet({
 
   // Handle adding a new skill
   const handleAddSkill = () => {
+    if (stats["expTotais"] - stats["expGastos"] < 1) {
+      alert("Você não possui experiência suficiente para comprar esta perícia");
+      setNewSkill("");
+      return;
+    }
+
     if (newSkill && !skills[newSkill] && canAddSkill(newSkill)) {
       setSkills({
         ...skills,
         [newSkill]: {
-          valor: 0,
-          expGastos: 0,
+          valor: 1,
+          expGastos: 1,
         },
       });
 
@@ -378,9 +384,7 @@ export default function SkillsSheet({
                   size="icon"
                   className="h-8 w-8 text-blue-500 hover:text-blue-700 hover:bg-blue-100"
                   onClick={() => handleRollSkill(skill, values.valor)}
-                  title={`Rolar dados (${
-                    LEVEL_DICE[values.valor] || "Nível inválido"
-                  })`}
+                  title={`Rolar dados`}
                 >
                   <Dice6 className="h-4 w-4" />
                   <span className="sr-only">Rolar dados para {skill}</span>
@@ -389,16 +393,6 @@ export default function SkillsSheet({
             ))}
           </div>
         </div>
-
-        <Button
-          variant="outline"
-          className="mt-2 flex items-center gap-2 w-fit print:hidden"
-          onClick={() => handleRollSkill("Perícia nível 0", 0)}
-          title="Rolar dados para perícia nível 0"
-        >
-          <Dice6 className="h-4 w-4" />
-          Perícia nível 0
-        </Button>
 
         {/* Form to add new skill */}
         <div
@@ -409,7 +403,6 @@ export default function SkillsSheet({
           <h3 className="font-medium mb-4">Adicionar nova perícia</h3>
           <div className="flex items-end gap-2">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="new-skill">Perícia</Label>
               <Select value={newSkill} onValueChange={setNewSkill}>
                 <SelectTrigger className="w-[280px]">
                   <SelectValue placeholder="Selecione uma perícia" />
