@@ -6,6 +6,12 @@ import { Button } from "../../ui/button";
 import { Dice6 } from "lucide-react";
 import { LEVEL_DICE } from "@/constants/dice-levels";
 import { rollDice } from "@/utils/rolls";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface AttributeRowProps {
   title: string;
@@ -22,6 +28,8 @@ export function AttributeRow({
   currentName,
   expName,
 }: AttributeRowProps) {
+  const abbreviatedTitle = title.slice(0, 3).toUpperCase();
+
   const handleRoll = () => {
     const attributeLevel = basicStats[currentName];
     const diceNotation = LEVEL_DICE[attributeLevel];
@@ -32,8 +40,19 @@ export function AttributeRow({
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <span className="font-semibold min-w-24">{title}:</span>
+    <div className="flex items-center gap-2 p-2 border rounded-lg bg-card">
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="font-semibold cursor-help">
+              {abbreviatedTitle}:
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{title}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <div className="flex items-center gap-1">
         <StatInput
           name={currentName}
