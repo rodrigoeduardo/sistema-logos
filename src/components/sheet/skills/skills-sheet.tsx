@@ -266,8 +266,6 @@ export default function SkillsSheet({
 
   return (
     <section>
-      <h2 className="text-xl font-bold mb-4">Perícias (EXP X1)</h2>
-
       {lastRollResult && (
         <div className="mb-4 p-4 border rounded-lg bg-gray-50">
           <DiceRollResult result={lastRollResult} />

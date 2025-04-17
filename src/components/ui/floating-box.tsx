@@ -12,6 +12,7 @@ interface FloatingBoxProps {
   className?: string;
   minWidth?: number;
   minHeight?: number;
+  titleClassName?: string;
 }
 
 export function FloatingBox({
@@ -19,6 +20,7 @@ export function FloatingBox({
   title,
   defaultFloating = false,
   className,
+  titleClassName,
   minWidth = 200,
   minHeight = 200,
 }: FloatingBoxProps) {
@@ -193,7 +195,7 @@ export function FloatingBox({
       onMouseDown={handleMouseDown}
     >
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold">{title}</h2>
+        <h2 className={cn("text-lg font-bold", titleClassName)}>{title}</h2>
         <div className="flex items-center gap-2">
           {isFloating && <GripVertical className="h-4 w-4 text-gray-400" />}
           <Button

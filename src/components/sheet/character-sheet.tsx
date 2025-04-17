@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { Copy, Printer } from "lucide-react";
 import { toast } from "sonner";
 import { useReactToPrint } from "react-to-print";
+import { FloatingBox } from "../ui/floating-box";
 
 export type SkillValues = {
   [key: string]: {
@@ -188,85 +189,85 @@ export default function CharacterSheet() {
         </div>
 
         {/* Atributos */}
-        <section>
-          <h2 className="text-xl font-bold mb-4">Atributos (EXP X5)</h2>
+        <FloatingBox title="Atributos (EXP X5)" titleClassName="text-xl">
+          <section>
+            <div className="grid grid-cols-4 gap-2">
+              <AttributeRow
+                title="Força"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="forcaAtual"
+                expName="forcaExpGastos"
+              />
 
-          <div className="grid grid-cols-4 gap-2">
-            <AttributeRow
-              title="Força"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="forcaAtual"
-              expName="forcaExpGastos"
-            />
+              <AttributeRow
+                title="Constituição"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="constituicaoAtual"
+                expName="constituicaoExpGastos"
+              />
 
-            <AttributeRow
-              title="Constituição"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="constituicaoAtual"
-              expName="constituicaoExpGastos"
-            />
+              <AttributeRow
+                title="Destreza"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="destrezaAtual"
+                expName="destrezaExpGastos"
+              />
 
-            <AttributeRow
-              title="Destreza"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="destrezaAtual"
-              expName="destrezaExpGastos"
-            />
+              <AttributeRow
+                title="Percepção"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="percepcaoAtual"
+                expName="percepcaoExpGastos"
+              />
 
-            <AttributeRow
-              title="Percepção"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="percepcaoAtual"
-              expName="percepcaoExpGastos"
-            />
+              <AttributeRow
+                title="Inteligência"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="inteligenciaAtual"
+                expName="inteligenciaExpGastos"
+              />
 
-            <AttributeRow
-              title="Inteligência"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="inteligenciaAtual"
-              expName="inteligenciaExpGastos"
-            />
+              <AttributeRow
+                title="Sabedoria"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="sabedoriaAtual"
+                expName="sabedoriaExpGastos"
+              />
 
-            <AttributeRow
-              title="Sabedoria"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="sabedoriaAtual"
-              expName="sabedoriaExpGastos"
-            />
-
-            <AttributeRow
-              title="Carisma"
-              basicStats={basicStats}
-              onChange={handleChange}
-              currentName="carismaAtual"
-              expName="carismaExpGastos"
-            />
-          </div>
-        </section>
+              <AttributeRow
+                title="Carisma"
+                basicStats={basicStats}
+                onChange={handleChange}
+                currentName="carismaAtual"
+                expName="carismaExpGastos"
+              />
+            </div>
+          </section>
+        </FloatingBox>
 
         {/* Perícias */}
-        <SkillsSheet
-          skills={skills}
-          setSkills={setSkills}
-          stats={{
-            ...basicStats,
-            ...stats,
-          }}
-          setStats={setStats}
-        />
+        <FloatingBox title="Perícias (EXP X1)" titleClassName="text-xl">
+          <SkillsSheet
+            skills={skills}
+            setSkills={setSkills}
+            stats={{
+              ...basicStats,
+              ...stats,
+            }}
+            setStats={setStats}
+          />
+        </FloatingBox>
 
         {/* Existência e Defesas */}
         <div className="flex gap-8">
           {/* Existência */}
-          <section className="flex-1">
-            <h2 className="text-xl font-bold mb-4">Existência</h2>
-
+          <FloatingBox title="Existência" titleClassName="text-xl">
             <div className="space-y-4">
               <StatRow
                 title="Vitalidade"
@@ -340,12 +341,10 @@ export default function CharacterSheet() {
                 modifiers={ATTRIBUTES_MODIFIERS.regeneracaoMana.modifiers}
               />
             </div>
-          </section>
+          </FloatingBox>
 
           {/* Defesas */}
-          <section className="flex-1">
-            <h2 className="text-xl font-bold mb-4">Defesas</h2>
-
+          <FloatingBox title="Defesas" titleClassName="text-xl">
             <div className="space-y-4">
               <DefenseRow
                 title="Fortitude"
@@ -403,7 +402,7 @@ export default function CharacterSheet() {
                 modifiers={DEFENSES_MODIFIERS.fragilidade.modifiers}
               />
             </div>
-          </section>
+          </FloatingBox>
         </div>
       </Card>
     </div>
