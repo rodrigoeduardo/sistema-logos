@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { Dice6 } from "lucide-react";
+import { FloatingBox } from "../../ui/floating-box";
 
 export default function DiceBox() {
   const [isClient, setIsClient] = useState(false);
@@ -57,14 +58,13 @@ export default function DiceBox() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">Dados</h2>
+    <FloatingBox title="Dados">
       <div
         ref={diceBoxRef}
         id="dice-box"
         className="w-full h-72 border rounded-xl"
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-2">
         <form
           className="flex items-center gap-2 w-full"
           onSubmit={(e) => {
@@ -85,6 +85,6 @@ export default function DiceBox() {
           </Button>
         </form>
       </div>
-    </div>
+    </FloatingBox>
   );
 }

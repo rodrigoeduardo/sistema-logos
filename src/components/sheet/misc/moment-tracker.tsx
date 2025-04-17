@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { cn } from "@/lib/utils";
+import { FloatingBox } from "@/components/ui/floating-box";
 
 type MomentType = "A" | "B";
 
@@ -57,9 +58,7 @@ export default function MomentTracker({
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">Marcador de Momentos</h2>
-
+    <FloatingBox title="Marcador de Momentos">
       <div className="flex flex-col gap-4 p-4 border rounded-xl shadow-sm">
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium">Momento {currentMoment}</span>
@@ -104,6 +103,6 @@ export default function MomentTracker({
           </Button>
         </div>
       </div>
-    </div>
+    </FloatingBox>
   );
 }

@@ -2,11 +2,11 @@
 import DiceBox from "@/components/sheet/dice/dice-box";
 import CharacterSheet from "@/components/sheet/character-sheet";
 import NotesBox from "@/components/sheet/misc/notes-box";
-import MomentTracker from "@/components/moment-tracker";
+import MomentTracker from "@/components/sheet/misc/moment-tracker";
 
 export default function Ficha() {
   return (
-    <main className="flex gap-4 p-4">
+    <main className="flex gap-4 p-4" id="body-ficha">
       <CharacterSheet />
 
       <div className="flex flex-col gap-4 w-full">

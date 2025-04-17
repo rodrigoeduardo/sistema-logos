@@ -261,147 +261,150 @@ export default function CharacterSheet() {
           setStats={setStats}
         />
 
-        {/* Existência */}
-        <section>
-          <h2 className="text-xl font-bold mb-4">Existência</h2>
+        {/* Existência e Defesas */}
+        <div className="flex gap-8">
+          {/* Existência */}
+          <section className="flex-1">
+            <h2 className="text-xl font-bold mb-4">Existência</h2>
 
-          <div className="space-y-4">
-            <StatRow
-              title="Vitalidade"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="vitalidadeAtual"
-              totalName="vitalidadeTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.vitalidade.base}
-              modifiers={ATTRIBUTES_MODIFIERS.vitalidade.modifiers}
-            />
+            <div className="space-y-4">
+              <StatRow
+                title="Vitalidade"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="vitalidadeAtual"
+                totalName="vitalidadeTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.vitalidade.base}
+                modifiers={ATTRIBUTES_MODIFIERS.vitalidade.modifiers}
+              />
 
-            <StatRow
-              title="Reg. Vit"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="regVitAtual"
-              totalName="regVitTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.base}
-              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.modifiers}
-            />
+              <StatRow
+                title="Reg. Vit"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="regVitAtual"
+                totalName="regVitTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.base}
+                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.modifiers}
+              />
 
-            <StatRow
-              title="Estamina"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="estaminaAtual"
-              totalName="estaminaTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.estamina.base}
-              modifiers={ATTRIBUTES_MODIFIERS.estamina.modifiers}
-            />
+              <StatRow
+                title="Estamina"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="estaminaAtual"
+                totalName="estaminaTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.estamina.base}
+                modifiers={ATTRIBUTES_MODIFIERS.estamina.modifiers}
+              />
 
-            <StatRow
-              title="Reg. Est"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="regEstAtual"
-              totalName="regEstTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.base}
-              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.modifiers}
-            />
+              <StatRow
+                title="Reg. Est"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="regEstAtual"
+                totalName="regEstTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.base}
+                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.modifiers}
+              />
 
-            <StatRow
-              title="Mana"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="manaAtual"
-              totalName="manaTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.mana.base}
-              modifiers={ATTRIBUTES_MODIFIERS.mana.modifiers}
-            />
+              <StatRow
+                title="Mana"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="manaAtual"
+                totalName="manaTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.mana.base}
+                modifiers={ATTRIBUTES_MODIFIERS.mana.modifiers}
+              />
 
-            <StatRow
-              title="Reg. Man"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="regManAtual"
-              totalName="regManTotal"
-              baseValue={ATTRIBUTES_MODIFIERS.regeneracaoMana.base}
-              modifiers={ATTRIBUTES_MODIFIERS.regeneracaoMana.modifiers}
-            />
-          </div>
-        </section>
+              <StatRow
+                title="Reg. Man"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="regManAtual"
+                totalName="regManTotal"
+                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoMana.base}
+                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoMana.modifiers}
+              />
+            </div>
+          </section>
 
-        {/* Defesas */}
-        <section>
-          <h2 className="text-xl font-bold mb-4">Defesas</h2>
+          {/* Defesas */}
+          <section className="flex-1">
+            <h2 className="text-xl font-bold mb-4">Defesas</h2>
 
-          <div className="space-y-4">
-            <DefenseRow
-              title="Fortitude"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="fortitudeAtual"
-              bonusName="fortitudeBon"
-              penaltyName="fortitudePen"
-              totalName="fortitudeTotal"
-              baseValue={DEFENSES_MODIFIERS.fortitude.base}
-              modifiers={DEFENSES_MODIFIERS.fortitude.modifiers}
-            />
+            <div className="space-y-4">
+              <DefenseRow
+                title="Fortitude"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="fortitudeAtual"
+                bonusName="fortitudeBon"
+                penaltyName="fortitudePen"
+                totalName="fortitudeTotal"
+                baseValue={DEFENSES_MODIFIERS.fortitude.base}
+                modifiers={DEFENSES_MODIFIERS.fortitude.modifiers}
+              />
 
-            <DefenseRow
-              title="Vontade"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="vontadeAtual"
-              bonusName="vontadeBon"
-              penaltyName="vontadePen"
-              totalName="vontadeTotal"
-              baseValue={DEFENSES_MODIFIERS.vontade.base}
-              modifiers={DEFENSES_MODIFIERS.vontade.modifiers}
-            />
+              <DefenseRow
+                title="Vontade"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="vontadeAtual"
+                bonusName="vontadeBon"
+                penaltyName="vontadePen"
+                totalName="vontadeTotal"
+                baseValue={DEFENSES_MODIFIERS.vontade.base}
+                modifiers={DEFENSES_MODIFIERS.vontade.modifiers}
+              />
 
-            <DefenseRow
-              title="Reflexos"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="reflexosAtual"
-              bonusName="reflexosBon"
-              penaltyName="reflexosPen"
-              totalName="reflexosTotal"
-              baseValue={DEFENSES_MODIFIERS.reflexos.base}
-              modifiers={DEFENSES_MODIFIERS.reflexos.modifiers}
-            />
+              <DefenseRow
+                title="Reflexos"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="reflexosAtual"
+                bonusName="reflexosBon"
+                penaltyName="reflexosPen"
+                totalName="reflexosTotal"
+                baseValue={DEFENSES_MODIFIERS.reflexos.base}
+                modifiers={DEFENSES_MODIFIERS.reflexos.modifiers}
+              />
 
-            <DefenseRow
-              title="Fragilidade"
-              basicStats={basicStats}
-              stats={stats}
-              setStats={setStats}
-              onChange={handleChange}
-              currentName="fragilidadeAtual"
-              bonusName="fragilidadeBon"
-              penaltyName="fragilidadePen"
-              totalName="fragilidadeTotal"
-              baseValue={DEFENSES_MODIFIERS.fragilidade.base}
-              modifiers={DEFENSES_MODIFIERS.fragilidade.modifiers}
-            />
-          </div>
-        </section>
+              <DefenseRow
+                title="Fragilidade"
+                basicStats={basicStats}
+                stats={stats}
+                setStats={setStats}
+                onChange={handleChange}
+                currentName="fragilidadeAtual"
+                bonusName="fragilidadeBon"
+                penaltyName="fragilidadePen"
+                totalName="fragilidadeTotal"
+                baseValue={DEFENSES_MODIFIERS.fragilidade.base}
+                modifiers={DEFENSES_MODIFIERS.fragilidade.modifiers}
+              />
+            </div>
+          </section>
+        </div>
       </Card>
     </div>
   );
