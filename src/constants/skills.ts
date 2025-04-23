@@ -44,6 +44,7 @@ export const COMPLEX_SKILLS_ATTRIBUTES: Record<string, string> = {
   Prontidão: "Percepção",
   Raciocínio: "Inteligência",
   "Conhecimento Específico": "Inteligência",
+  "Usar Tecnologia": "Inteligência",
   "Magia de Água": "Inteligência",
   "Magia de Ar": "Inteligência",
   "Magia de Essência": "Inteligência",
@@ -141,6 +142,10 @@ export const COMPLEX_SKILLS_PREREQUISITES: Record<
   },
   "Conhecimento Específico": {
     Autoconhecimento: 1,
+    Lógica: 1,
+  },
+  "Usar Tecnologia": {
+    "Coordenação Motora": 1,
     Lógica: 1,
   },
   "Magia de Água": {
