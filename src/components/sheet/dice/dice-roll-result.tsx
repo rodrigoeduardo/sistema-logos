@@ -16,20 +16,20 @@ export function DiceRollResult({ result }: DiceRollResultProps) {
   // Check for Desastre or Triunfo
   const isDesastre =
     fortuneRolls[0].value === fortuneRolls[1].value &&
-    fortuneRolls[0].value <= 5;
+    fortuneRolls[0].value <= 6;
   const isTriunfo =
     fortuneRolls[0].value === fortuneRolls[1].value &&
-    fortuneRolls[0].value >= 6;
+    fortuneRolls[0].value >= 7;
 
   // Check for Duplo and Triplo
   const isDesastreDuplo =
     fortuneRolls[0].value === 1 && fortuneRolls[1].value === 1;
   const isDesastreTriplo =
-    fortuneRolls[0].value === 1 && fortuneRolls[1].value === 10;
+    fortuneRolls[0].value === 1 && fortuneRolls[1].value === 12;
   const isTriunfoDuplo =
-    fortuneRolls[0].value === 10 && fortuneRolls[1].value === 10;
+    fortuneRolls[0].value === 12 && fortuneRolls[1].value === 12;
   const isTriunfoTriplo =
-    fortuneRolls[0].value === 10 && fortuneRolls[1].value === 1;
+    fortuneRolls[0].value === 12 && fortuneRolls[1].value === 1;
 
   return (
     <div className="flex flex-col gap-2">

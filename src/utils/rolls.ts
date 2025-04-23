@@ -75,7 +75,7 @@ export function rollDice(
   // Calculate effective level (skill + attribute)
   const effectiveLevel = skillLevel + attributeLevel;
   const effectiveDiceNotation = LEVEL_DICE[effectiveLevel] || diceNotation;
-  const notationWithFortune = [...effectiveDiceNotation, "2d10"];
+  const notationWithFortune = [...effectiveDiceNotation, "2d12"];
 
   dice.roll(notationWithFortune);
   dice.onRollComplete = (diceResult: DiceRollResult) => {
