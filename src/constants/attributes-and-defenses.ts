@@ -97,6 +97,7 @@ export const DEFENSES_MODIFIERS = {
     base: 2,
     modifiers: [
       { name: "carismaAtual", mod: 1 },
+      { name: "constituicaoAtual", mod: 1 },
       { name: "fragilidadeOutros", label: "Outros", custom: true },
     ],
   },
