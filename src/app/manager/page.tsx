@@ -7,7 +7,10 @@ import {
   useSetDefenses,
 } from "@/hooks";
 import { VariablesModifiers } from "@/constants/attributes-and-defenses";
-import { getVariableOptions } from "@/constants/variable-labels";
+import {
+  getVariableLabel,
+  getVariableOptions,
+} from "@/constants/variable-labels";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -305,7 +308,9 @@ export default function Manager() {
               Object.entries(editingAttributes).map(([key, config]) => (
                 <Card key={key}>
                   <CardHeader>
-                    <CardTitle className="capitalize">{key}</CardTitle>
+                    <CardTitle className="capitalize">
+                      {getVariableLabel(key)}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>

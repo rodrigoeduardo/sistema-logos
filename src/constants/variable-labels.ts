@@ -7,6 +7,19 @@ export const VARIABLE_LABELS: Record<string, string> = {
   inteligenciaAtual: "Inteligência",
   sabedoriaAtual: "Sabedoria",
   carismaAtual: "Carisma",
+
+  vitalidade: "Vitalidade",
+  regeneracaoVitalidade: "Reg. Vitalidade",
+  estamina: "Estamina",
+  regeneracaoEstamina: "Reg. Estamina",
+  mana: "Mana",
+  regeneracaoMana: "Reg. Mana",
+
+  // Defenses
+  fortitude: "Fortitude",
+  reflexos: "Reflexos",
+  vontade: "Vontade",
+  fragilidade: "Fragilidade",
 };
 
 export const getVariableLabel = (variableName: string): string => {
