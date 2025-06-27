@@ -1,4 +1,20 @@
-export const ATTRIBUTES_MODIFIERS = {
+type VariableModifier = {
+  name: string;
+  mod?: number;
+  label?: string;
+  custom?: boolean;
+};
+
+type VariableConfig = {
+  base: number;
+  modifiers: VariableModifier[];
+};
+
+export type VariablesModifiers = {
+  [key: string]: VariableConfig;
+};
+
+export const ATTRIBUTES_MODIFIERS: VariablesModifiers = {
   vitalidade: {
     base: 6,
     modifiers: [
@@ -62,7 +78,7 @@ export const ATTRIBUTES_MODIFIERS = {
   },
 };
 
-export const DEFENSES_MODIFIERS = {
+export const DEFENSES_MODIFIERS: VariablesModifiers = {
   fortitude: {
     base: 4,
     modifiers: [

@@ -120,7 +120,9 @@ export function StatRow({
                     name={name}
                     value={basicStats[mod.name] * (mod.mod ?? 1)}
                     onChange={onChange}
-                    label={mod.label ?? getStatLabel(mod.name, mod.mod)}
+                    label={
+                      !!mod.label ? mod.label : getStatLabel(mod.name, mod.mod)
+                    }
                     readOnly={!mod.custom}
                   />
                   {mod.name !== modifiers[modifiers.length - 1].name && (

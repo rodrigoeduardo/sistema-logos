@@ -8,15 +8,12 @@ import { AttributeRow } from "./attributes/attribute-row";
 import { StatInput } from "./stats/stat-input";
 import SkillsSheet from "./skills/skills-sheet";
 import { initialBasicStats, initialStats } from "@/constants/initial-state";
-import {
-  ATTRIBUTES_MODIFIERS,
-  DEFENSES_MODIFIERS,
-} from "@/constants/attributes-and-defenses";
+import { useGetAttributes, useGetDefenses } from "@/hooks";
 import EditableTitle from "./misc/editable-title";
 import CodeRedemption from "./misc/code-redemption";
 import { isBasicStat } from "@/utils/stats";
 import { Button } from "../ui/button";
-import { Copy, Printer } from "lucide-react";
+import { Copy, Printer, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useReactToPrint } from "react-to-print";
 import { FloatingBox } from "../ui/floating-box";
@@ -35,6 +32,12 @@ export default function CharacterSheet() {
   const printSheet = useReactToPrint({
     contentRef: sheetRef,
   });
+
+  // Fetch data from database
+  const { data: attributesModifiers, isLoading: loadingAttributes } =
+    useGetAttributes();
+  const { data: defensesModifiers, isLoading: loadingDefenses } =
+    useGetDefenses();
 
   const [title, setTitle] = useState("Ficha de Personagem");
 
@@ -144,6 +147,32 @@ export default function CharacterSheet() {
 
     toast.success("Código da ficha copiado para a área de transferência");
   };
+
+  // Show loading state while fetching data
+  if (loadingAttributes || loadingDefenses) {
+    return (
+      <div className="flex items-center justify-center min-h-screen w-screen">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin" />
+          <p>Carregando configurações...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if data is not available
+  if (!attributesModifiers || !defensesModifiers) {
+    return (
+      <div className="flex items-center justify-center min-h-screen w-screen">
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-red-500">Erro ao carregar configurações</p>
+          <Button onClick={() => window.location.reload()}>
+            Tentar novamente
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-screen bg-white" ref={sheetRef}>
@@ -277,8 +306,8 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="vitalidadeAtual"
                 totalName="vitalidadeTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.vitalidade.base}
-                modifiers={ATTRIBUTES_MODIFIERS.vitalidade.modifiers}
+                baseValue={attributesModifiers.vitalidade?.base || 0}
+                modifiers={attributesModifiers.vitalidade?.modifiers || []}
               />
 
               <StatRow
@@ -289,8 +318,10 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="regVitAtual"
                 totalName="regVitTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.base}
-                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoVitalidade.modifiers}
+                baseValue={attributesModifiers.regeneracaoVitalidade?.base || 0}
+                modifiers={
+                  attributesModifiers.regeneracaoVitalidade?.modifiers || []
+                }
               />
 
               <StatRow
@@ -301,8 +332,8 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="estaminaAtual"
                 totalName="estaminaTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.estamina.base}
-                modifiers={ATTRIBUTES_MODIFIERS.estamina.modifiers}
+                baseValue={attributesModifiers.estamina?.base || 0}
+                modifiers={attributesModifiers.estamina?.modifiers || []}
               />
 
               <StatRow
@@ -313,8 +344,10 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="regEstAtual"
                 totalName="regEstTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.base}
-                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoEstamina.modifiers}
+                baseValue={attributesModifiers.regeneracaoEstamina?.base || 0}
+                modifiers={
+                  attributesModifiers.regeneracaoEstamina?.modifiers || []
+                }
               />
 
               <StatRow
@@ -325,8 +358,8 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="manaAtual"
                 totalName="manaTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.mana.base}
-                modifiers={ATTRIBUTES_MODIFIERS.mana.modifiers}
+                baseValue={attributesModifiers.mana?.base || 0}
+                modifiers={attributesModifiers.mana?.modifiers || []}
               />
 
               <StatRow
@@ -337,8 +370,8 @@ export default function CharacterSheet() {
                 onChange={handleChange}
                 currentName="regManAtual"
                 totalName="regManTotal"
-                baseValue={ATTRIBUTES_MODIFIERS.regeneracaoMana.base}
-                modifiers={ATTRIBUTES_MODIFIERS.regeneracaoMana.modifiers}
+                baseValue={attributesModifiers.regeneracaoMana?.base || 0}
+                modifiers={attributesModifiers.regeneracaoMana?.modifiers || []}
               />
             </div>
           </FloatingBox>
@@ -356,8 +389,8 @@ export default function CharacterSheet() {
                 bonusName="fortitudeBon"
                 penaltyName="fortitudePen"
                 totalName="fortitudeTotal"
-                baseValue={DEFENSES_MODIFIERS.fortitude.base}
-                modifiers={DEFENSES_MODIFIERS.fortitude.modifiers}
+                baseValue={defensesModifiers.fortitude?.base || 0}
+                modifiers={defensesModifiers.fortitude?.modifiers || []}
               />
 
               <DefenseRow
@@ -370,8 +403,8 @@ export default function CharacterSheet() {
                 bonusName="vontadeBon"
                 penaltyName="vontadePen"
                 totalName="vontadeTotal"
-                baseValue={DEFENSES_MODIFIERS.vontade.base}
-                modifiers={DEFENSES_MODIFIERS.vontade.modifiers}
+                baseValue={defensesModifiers.vontade?.base || 0}
+                modifiers={defensesModifiers.vontade?.modifiers || []}
               />
 
               <DefenseRow
@@ -384,8 +417,8 @@ export default function CharacterSheet() {
                 bonusName="reflexosBon"
                 penaltyName="reflexosPen"
                 totalName="reflexosTotal"
-                baseValue={DEFENSES_MODIFIERS.reflexos.base}
-                modifiers={DEFENSES_MODIFIERS.reflexos.modifiers}
+                baseValue={defensesModifiers.reflexos?.base || 0}
+                modifiers={defensesModifiers.reflexos?.modifiers || []}
               />
 
               <DefenseRow
@@ -398,8 +431,8 @@ export default function CharacterSheet() {
                 bonusName="fragilidadeBon"
                 penaltyName="fragilidadePen"
                 totalName="fragilidadeTotal"
-                baseValue={DEFENSES_MODIFIERS.fragilidade.base}
-                modifiers={DEFENSES_MODIFIERS.fragilidade.modifiers}
+                baseValue={defensesModifiers.fragilidade?.base || 0}
+                modifiers={defensesModifiers.fragilidade?.modifiers || []}
               />
             </div>
           </FloatingBox>
