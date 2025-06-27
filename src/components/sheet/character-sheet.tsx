@@ -163,7 +163,7 @@ export default function CharacterSheet() {
   // Show error state if data is not available
   if (!attributesModifiers || !defensesModifiers) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen w-screen">
         <div className="flex flex-col items-center gap-4">
           <p className="text-red-500">Erro ao carregar configurações</p>
           <Button onClick={() => window.location.reload()}>
