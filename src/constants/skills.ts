@@ -34,17 +34,18 @@ export const COMPLEX_SKILLS_ATTRIBUTES: Record<string, string> = {
   Atletismo: "Força",
   "Condução de Veículo": "Destreza",
   Enganação: "Carisma",
-  "História/Religião": "Inteligência",
+  "Conhecimentos Gerais": "Inteligência",
   Intuição: "Carisma",
-  Investigação: "Percepção",
   Medicina: "Sabedoria",
   Natureza: "Sabedoria",
   "Operação Minuciosa": "Destreza",
   Persuasão: "Carisma",
   Prontidão: "Percepção",
   Raciocínio: "Inteligência",
+  Sentidos: "Percepção",
+  Tecnofício: "Inteligência",
+  Magia: "Inteligência",
   "Conhecimento Específico": "Inteligência",
-  "Usar Tecnologia": "Inteligência",
   "Magia de Água": "Inteligência",
   "Magia de Ar": "Inteligência",
   "Magia de Essência": "Inteligência",
@@ -104,17 +105,13 @@ export const COMPLEX_SKILLS_PREREQUISITES: Record<
     Empatia: 1,
     Autoconhecimento: 1,
   },
-  "História/Religião": {
+  "Conhecimentos Gerais": {
     Autoconhecimento: 1,
     Lógica: 1,
   },
   Intuição: {
     Empatia: 1,
     Autoconhecimento: 1,
-  },
-  Investigação: {
-    Sensibilidade: 1,
-    Lógica: 1,
   },
   Medicina: {
     "Coordenação Motora": 1,
@@ -140,12 +137,20 @@ export const COMPLEX_SKILLS_PREREQUISITES: Record<
     Sensibilidade: 1,
     Lógica: 1,
   },
-  "Conhecimento Específico": {
+  Sentidos: {
+    Sensibilidade: 1,
+    Lógica: 1,
+  },
+  Tecnofício: {
+    "Coordenação Motora": 1,
+    Lógica: 1,
+  },
+  Magia: {
     Autoconhecimento: 1,
     Lógica: 1,
   },
-  "Usar Tecnologia": {
-    "Coordenação Motora": 1,
+  "Conhecimento Específico": {
+    Autoconhecimento: 1,
     Lógica: 1,
   },
   "Magia de Água": {
